@@ -54,6 +54,73 @@ Print all keys in AEFA
 	f = h5py.File("AEFA.h5", 'r')
 	print('AEFA keys are:',f.keys())
 	
+Print all attributes in AEFA
+
+	import h5py
+	f = h5py.File("AEFA.h5", 'r')
+	keys=list(f.keys())
+	idx=keys[0]
+	dataset = f.get(idx)
+	print('AEFA attributes are:',dataset.attrs.keys())
+
+Plot EM features of one station in AEFA
+
+	import h5py
+	import numpy as np
+	import matplotlib.pyplot as plt
+	plt.rcParams["figure.figsize"] = (7,8.2)
+	
+	f = h5py.File("AEFA.h5", 'r')
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='EM']
+	idx=keys[0]
+	dataset = f.get(idx)
+	data = np.array(dataset['data'])
+	fig=plt.figure()
+	ax1 = fig.add_subplot(311)
+	plt.plot(data[:,0], 'k',label='Z')
+	plt.ylabel('Variation', fontsize=12) 
+	plt.title('Station: '+idx, fontsize=12) 
+	
+	ax1 = fig.add_subplot(312)
+	plt.plot(data[:,2], 'k',label='Z')
+	plt.ylabel('Skewness', fontsize=12) 
+	
+	ax1 = fig.add_subplot(313)
+	plt.plot(data[:,3], 'k',label='Z')
+	plt.ylabel('Kurtosis', fontsize=12) 
+	plt.xlabel('Sample', fontsize=12) 
+	plt.show()
+	
+Plot GA features of one station in AEFA
+
+	import h5py
+	import numpy as np
+	import matplotlib.pyplot as plt
+	plt.rcParams["figure.figsize"] = (7,8.2)
+	
+	f = h5py.File("AEFA.h5", 'r')
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='GA']
+	idx=keys[0]
+	dataset = f.get(idx)
+	data = np.array(dataset['data'])
+	fig=plt.figure()
+	ax1 = fig.add_subplot(311)
+	plt.plot(data[:,0], 'k',label='Z')
+	plt.ylabel('Variation', fontsize=12) 
+	plt.title('Station: '+idx, fontsize=12) 
+	
+	ax1 = fig.add_subplot(312)
+	plt.plot(data[:,2], 'k',label='Z')
+	plt.ylabel('Skewness', fontsize=12) 
+	
+	ax1 = fig.add_subplot(313)
+	plt.plot(data[:,3], 'k',label='Z')
+	plt.ylabel('Kurtosis', fontsize=12) 
+	plt.xlabel('Sample', fontsize=12) 
+	plt.show()
+	
 -----------
 ## Development
     The development team welcomes voluntary contributions from any open-source enthusiast. 
