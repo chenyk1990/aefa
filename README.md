@@ -54,7 +54,7 @@ Print all keys in AEFA
 	f = h5py.File("AEFA.h5", 'r')
 	print('AEFA keys are:',f.keys())
 	
-Print all attributes in AEFA
+Print attributes in AEFA
 
 	import h5py
 	f = h5py.File("AEFA.h5", 'r')
@@ -62,6 +62,28 @@ Print all attributes in AEFA
 	idx=keys[0]
 	dataset = f.get(idx)
 	print('AEFA attributes are:',dataset.attrs.keys())
+
+Print all event attributes in AEFA
+
+	import h5py
+	f = h5py.File("AEFA.h5", 'r')
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='EV']
+	idx=keys[0]
+	dataset = f.get(idx)
+	print('AEFA event attributes are:',dataset.attrs.keys())
+	
+Print event (idth) information in AEFA
+	import h5py
+	f = h5py.File("AEFA.h5", 'r')
+	keys=list(f.keys())
+	
+	id=2 #event number
+	keys=[ii for ii in keys if ii=='EV_%d'%id]
+	idx=keys[0]
+	dataset = f.get(idx)
+	print('AEFA event attributes are:',dataset.attrs.keys())
+	print('longitude=%g,latitude=%g,magnitude=%g,time=%s,week=%d'%(dataset.attrs['ev_longitude'],dataset.attrs['ev_latitude'],dataset.attrs['ev_magnitude'],dataset.attrs['ev_time'],dataset.attrs['ev_week']))
 
 Plot EM features of one station in AEFA
 
