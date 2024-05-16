@@ -77,7 +77,6 @@ Print event (idth) information in AEFA
 	import h5py
 	f = h5py.File("AEFA.h5", 'r')
 	keys=list(f.keys())
-	
 	id=2 #event number
 	keys=[ii for ii in keys if ii=='EV_%d'%id]
 	idx=keys[0]
