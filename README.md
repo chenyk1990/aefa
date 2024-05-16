@@ -74,10 +74,11 @@ Print all event attributes in AEFA
 	print('AEFA event attributes are:',dataset.attrs.keys())
 	
 Print event (idth) information in AEFA
+
 	import h5py
 	f = h5py.File("AEFA.h5", 'r')
 	keys=list(f.keys())
-	id=2 #event number
+	id=2 #event NO
 	keys=[ii for ii in keys if ii=='EV_%d'%id]
 	idx=keys[0]
 	dataset = f.get(idx)
