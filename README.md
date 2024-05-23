@@ -41,10 +41,7 @@ Using the latest version
 -----------
 ## Download
 
-Google Drive link: https://drive.google.com/drive/folders/1WXVB8ytNB4bOaZ97oq6OmMRyAEg95trp?usp=sharing
-
-	wget /address_TBD/AEFA_20231111.h5
-	wget /address_TBD/ID_20231111.npy
+https://utexas.box.com/s/bgt5fok9s2aqk7x7a6c2g89jlfbyz9mn
 
 -----------
 ## Examples
