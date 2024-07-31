@@ -87,7 +87,7 @@ Plot EM features of one station in AEFA
 	import h5py
 	import numpy as np
 	import matplotlib.pyplot as plt
-	plt.rcParams["figure.figsize"] = (7,8.2)
+	plt.rcParams["figure.figsize"] = (7,4.2)
 	
 	f = h5py.File("AEFA.h5", 'r')
 	keys=list(f.keys())
@@ -100,11 +100,13 @@ Plot EM features of one station in AEFA
 	plt.plot(data[:,0], 'k',label='Z')
 	plt.ylabel('Variation', fontsize=12) 
 	plt.title('Station: '+idx, fontsize=12) 
-	
+	plt.setp(ax1.get_xticklabels(), visible=False)
+ 
 	ax1 = fig.add_subplot(312)
 	plt.plot(data[:,2], 'k',label='Z')
 	plt.ylabel('Skewness', fontsize=12) 
-	
+	plt.setp(ax1.get_xticklabels(), visible=False)
+ 
 	ax1 = fig.add_subplot(313)
 	plt.plot(data[:,3], 'k',label='Z')
 	plt.ylabel('Kurtosis', fontsize=12) 
@@ -116,7 +118,7 @@ Plot GA features of one station in AEFA
 	import h5py
 	import numpy as np
 	import matplotlib.pyplot as plt
-	plt.rcParams["figure.figsize"] = (7,8.2)
+	plt.rcParams["figure.figsize"] = (7,4.2)
 	
 	f = h5py.File("AEFA.h5", 'r')
 	keys=list(f.keys())
@@ -129,11 +131,13 @@ Plot GA features of one station in AEFA
 	plt.plot(data[:,0], 'k',label='Z')
 	plt.ylabel('Variation', fontsize=12) 
 	plt.title('Station: '+idx, fontsize=12) 
-	
+	plt.setp(ax1.get_xticklabels(), visible=False)
+  
 	ax1 = fig.add_subplot(312)
 	plt.plot(data[:,2], 'k',label='Z')
 	plt.ylabel('Skewness', fontsize=12) 
-	
+	plt.setp(ax1.get_xticklabels(), visible=False)
+  
 	ax1 = fig.add_subplot(313)
 	plt.plot(data[:,3], 'k',label='Z')
 	plt.ylabel('Kurtosis', fontsize=12) 
