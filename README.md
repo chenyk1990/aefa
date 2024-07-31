@@ -112,7 +112,9 @@ Plot EM features of one station in AEFA
 	plt.ylabel('Kurtosis', fontsize=12) 
 	plt.xlabel('Sample', fontsize=12) 
 	plt.show()
-	
+
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/em101.png' alt='Slicing' width=960/>
+
 Plot GA features of one station in AEFA
 
 	import h5py
@@ -143,7 +145,9 @@ Plot GA features of one station in AEFA
 	plt.ylabel('Kurtosis', fontsize=12) 
 	plt.xlabel('Sample', fontsize=12) 
 	plt.show()
-	
+
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/ga101.png' alt='Slicing' width=960/>
+
 -----------
 ## Development
     The development team welcomes voluntary contributions from any open-source enthusiast. 
