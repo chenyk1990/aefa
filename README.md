@@ -159,6 +159,7 @@ Plot GA features of one station in AEFA
 51 indicates 51 EM features detailed in Chen et al. (2025), 205920 indicates (204 weeks + 2 days)'s feature recordings. 
 A simple math gives: 205920 = 204*7*24*6 + 2*24*6;
 try:
+
 	import h5py;import numpy as np;
 	f = h5py.File("AEFA.h5", 'r');
 	keys=list(f.keys());keys=[ii for ii in keys if ii=='EM_101']
@@ -166,10 +167,11 @@ try:
 	data = np.array(dataset['data']);
 	print(data.shape) #(205920, 51)
 
-2. Similarly, for each GA station (e.g., GA_101) has a 205920 x 44 array. 
+3. Similarly, for each GA station (e.g., GA_101) has a 205920 x 44 array. 
 44 indicates 44 GA features detailed in Chen et al. (2025), 205920 indicates (204 weeks + 2 days)'s feature recordings. 
 A simple math gives: 205920 = 204*7*24*6 + 2*24*6;
 try:
+
 	import h5py;import numpy as np;
 	f = h5py.File("AEFA.h5", 'r');
 	keys=list(f.keys());keys=[ii for ii in keys if ii=='GA_101']
@@ -177,7 +179,7 @@ try:
 	data = np.array(dataset['data']);
 	print(data.shape) #(205920, 44)
 
-3. The starting time for the AEFA training data is 2017-01-01T00:00:00.000000Z (Sunday);
+4. The starting time for the AEFA training data is 2017-01-01T00:00:00.000000Z (Sunday);
    the ending time is 2020-11-30T23:50:00.000000Z (Monday); (1430 days in total);
    Features are given 0 values if the sensors malfunction at any time sample.
 
