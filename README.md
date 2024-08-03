@@ -83,6 +83,7 @@ Print event (idth) information in AEFA
 	print('longitude=%g,latitude=%g,magnitude=%g,time=%s,week=%d'%(dataset.attrs['ev_longitude'],dataset.attrs['ev_latitude'],dataset.attrs['ev_magnitude'],dataset.attrs['ev_time'],dataset.attrs['ev_week']))
 
 Plot Events (quickly) of AEFA
+
 	import h5py
 	f = h5py.File("AEFA.h5", 'r')
 	keys=list(f.keys())
@@ -93,9 +94,10 @@ Plot Events (quickly) of AEFA
 	plt.plot(lons,lats,'*',color='r',markersize=10)
 	plt.show()
  
-<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/events.png' alt='Slicing' width=960/>
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/events.png' alt='Slicing' width=500/>
 
 Plot stations (quickly) of AEFA
+
 	import h5py
 	f = h5py.File("AEFA.h5", 'r')
 	keys=list(f.keys())
@@ -106,7 +108,7 @@ Plot stations (quickly) of AEFA
 	plt.plot(lons,lats,'v',color='b',markersize=10)
 	plt.show()
  
-<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/stations.png' alt='Slicing' width=960/>
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/stations.png' alt='Slicing' width=500/>
 
 Plot EM features of one station in AEFA
 
