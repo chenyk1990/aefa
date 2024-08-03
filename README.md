@@ -82,6 +82,32 @@ Print event (idth) information in AEFA
 	print('AEFA event attributes are:',dataset.attrs.keys())
 	print('longitude=%g,latitude=%g,magnitude=%g,time=%s,week=%d'%(dataset.attrs['ev_longitude'],dataset.attrs['ev_latitude'],dataset.attrs['ev_magnitude'],dataset.attrs['ev_time'],dataset.attrs['ev_week']))
 
+Plot Events (quickly) of AEFA
+	import h5py
+	f = h5py.File("AEFA.h5", 'r')
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='EV']
+	events=[[f.get(ii).attrs['ev_longitude'],f.get(ii).attrs['ev_latitude']] for ii in keys]
+	import matplotlib.pyplot as plt
+	lons=[ii[0] for ii in events];lats=[ii[1] for ii in events]
+	plt.plot(lons,lats,'*',color='r',markersize=10)
+	plt.show()
+ 
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/events.png' alt='Slicing' width=960/>
+
+Plot stations (quickly) of AEFA
+	import h5py
+	f = h5py.File("AEFA.h5", 'r')
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='EM']
+	stations=[[f.get(ii).attrs['sta_longitude'],f.get(ii).attrs['sta_latitude']] for ii in keys]
+	import matplotlib.pyplot as plt
+	lons=[ii[0] for ii in stations];lats=[ii[1] for ii in stations]
+	plt.plot(lons,lats,'v',color='b',markersize=10)
+	plt.show()
+ 
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/stations.png' alt='Slicing' width=960/>
+
 Plot EM features of one station in AEFA
 
 	import h5py
