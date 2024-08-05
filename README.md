@@ -176,6 +176,64 @@ Plot GA features of one station in AEFA
 
 <img src='https://github.com/chenyk1990/gallery/blob/main/aefa/ga101.png' alt='Slicing' width=960/>
 
+
+Calculate the time sample NO shown in the above x axes from an arbitrary time in UTC
+
+	from obspy.core.utcdatetime import UTCDateTime
+	t0=UTCDateTime(2017, 1, 1, 0, 0, 0)
+	t1=UTCDateTime(2017, 1, 1, 0, 10, 0)
+	sample=int((t1-t0)/(60*10))
+ 	#or
+	import h5py
+	from obspy.core.utcdatetime import UTCDateTime
+	f = h5py.File("AEFA.h5", 'r')
+	t0=UTCDateTime(2017, 1, 1, 0, 0, 0)
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='GA']
+	idx=keys[0]
+	dataset = f.get(idx)
+	sample_min=int((dataset['time'][0]-float(t0))/(60*10))
+	print('Minimum sample in station %s is %d'%(dataset.attrs['station'],sample_min))
+
+Plot all events onto the above figures.
+
+	import h5py
+	from obspy.core.utcdatetime import UTCDateTime
+	f = h5py.File("AEFA.h5", 'r')
+	t0=UTCDateTime(2017, 1, 1, 0, 0, 0)
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='EV']
+
+	samples=[int((float(UTCDateTime(f.get(ii).attrs['ev_time']))-float(t0))/60/10) for ii in keys]
+
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='GA']
+	idx=keys[0]
+	dataset = f.get(idx)
+	data = np.array(dataset['data'])
+ 
+	import matplotlib.pyplot as plt
+	plt.rcParams["figure.figsize"] = (7,4.2)
+	fig=plt.figure()
+	ax1 = fig.add_subplot(311)
+	plt.plot(data[:,0], 'k',label='Z')
+	plt.ylabel('Variation', fontsize=12) 
+	plt.title('Station: '+idx, fontsize=12) 
+	plt.setp(ax1.get_xticklabels(), visible=False)
+	for ii in samples:
+		plt.plot(ii,0.5,'r')
+  
+	ax1 = fig.add_subplot(312)
+	plt.plot(data[:,2], 'k',label='Z')
+	plt.ylabel('Skewness', fontsize=12) 
+	plt.setp(ax1.get_xticklabels(), visible=False)
+  
+	ax1 = fig.add_subplot(313)
+	plt.plot(data[:,3], 'k',label='Z')
+	plt.ylabel('Kurtosis', fontsize=12) 
+	plt.xlabel('Sample', fontsize=12) 
+	plt.show()
+
 -----------
 ## Development
     The development team welcomes voluntary contributions from any open-source enthusiast. 
@@ -263,6 +321,8 @@ The way to check the smallest and largest timestamp is as follows:
 	m2=max([np.array(f.get(ii)['timeindex']).min() for ii in keys])
 	print('Minimum timestamp is %d and maximum timestamp is %d'%(m1,m2));
 	print('Minimum time samples in UTC is %s and maximum timestamp is %s'%(UTCDateTime(m1+8*60*60),UTCDateTime(m2+8*60*60)));
+
+The 'timeindex' attribute value is always 28800 (8*60*60) than the 'time' attribute value (real UTC time in floating NO)
 
 -----------
 ## Gallery
