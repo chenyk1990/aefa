@@ -219,6 +219,30 @@ The starting time for the AEFA training data is 2017-01-01T00:00:00.000000Z (Sun
 the ending time is 2020-11-30T23:50:00.000000Z (Monday); (1430 days in total);
 Features are given 0 values if the sensors malfunction at any time sample.
 
+
+Suppose we have an arbitrary UTC time t1 (e.g., UTCDateTime(2017, 1, 1, 0, 0, 20)), the way to calculate the time stamp is
+
+	from obspy.core.utcdatetime import UTCDateTime
+	t1=UTCDateTime(2017, 1, 1, 0, 0, 20)
+	t0=UTCDateTime(2017, 1, 1, 0, 0, 0)
+	timestamp=(t1-t0) + 1483200000 
+	print('The smallest timestamp is %d'%1483200000)
+
+Or
+	
+	import h5py;import numpy as np;
+	from obspy.core.utcdatetime import UTCDateTime
+	f = h5py.File("AEFA.h5", 'r');
+	keys=list(f.keys());keys=[ii for ii in keys if ii=='GA_101'];
+	idx=keys[0];dataset = f.get(idx);
+	data = np.array(dataset['data']);
+	time=np.array(dataset['time'],dtype='float')
+	t0=UTCDateTime(2017, 1, 1, 0, 0, 0);
+	timestamp_cal=[UTCDateTime(ii)-t0 + 1483200000  for ii in time]
+	timestamp=np.array(dataset['timeindex'],dtype='float')
+	print('Difference is %g'%np.linalg.norm(timestamp_cal-timestamp))
+  	
+ 	
 -----------
 ## Gallery
 The gallery figures of the aefa package can be found at
