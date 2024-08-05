@@ -220,7 +220,7 @@ the ending time is 2020-11-30T23:50:00.000000Z (Monday); (1430 days in total);
 Features are given 0 values if the sensors malfunction at any time sample.
 
 
-Suppose we have an arbitrary UTC time t1 (e.g., UTCDateTime(2017, 1, 1, 0, 0, 20)), the way to calculate the time stamp is
+Suppose we have an arbitrary UTC time t1 (e.g., UTCDateTime(2017, 1, 1, 0, 0, 20)), the way to calculate the timestamp is
 
 	from obspy.core.utcdatetime import UTCDateTime
 	t1=UTCDateTime(2017, 1, 1, 0, 0, 20)
@@ -242,7 +242,28 @@ Or
 	timestamp=np.array(dataset['timeindex'],dtype='float')
 	print('Difference is %g'%np.linalg.norm(timestamp_cal-timestamp))
   	
- 	
+
+Suppose we have an arbitrary timestamp (e.g., 1483200000), the way to calculate the UTC time is
+
+	from obspy.core.utcdatetime import UTCDateTime
+	timestamp=1483200000
+	t1=UTCDateTime(timestamp+8*60*60)
+	t2=UTCDateTime(2017, 1, 1, 0, 0, 0) + (timestamp-1483200000)
+ 	#or
+	if t1 == t2:
+		print('t1 == t2')
+
+The way to check the smallest and largest timestamp is as follows:
+
+	import h5py;import numpy as np;
+	from obspy.core.utcdatetime import UTCDateTime
+	f = h5py.File("AEFA.h5", 'r');
+	keys=list(f.keys());keys=[ii for ii in keys if ii[0:2]=='EM' or ii[0:2]=='GA'];
+	m1=min([np.array(f.get(ii)['timeindex']).min() for ii in keys])
+	m2=max([np.array(f.get(ii)['timeindex']).min() for ii in keys])
+	print('Minimum timestamp is %d and maximum timestamp is %d'%(m1,m2));
+	print('Minimum time samples in UTC is %s and maximum timestamp is %s'%(UTCDateTime(m1+8*60*60),UTCDateTime(m2+8*60*60)));
+
 -----------
 ## Gallery
 The gallery figures of the aefa package can be found at
