@@ -343,6 +343,7 @@ Suppose we have an arbitrary timestamp (e.g., 1483200000), the way to calculate 
  	#or
 	if t1 == t2:
 		print('t1 == t2')
+NOTE: The reason for +8*60*60 (8 hours) is that China Standard Time (CST) is UTC+8. Here t1 and t2 (and other times) are both local time. 
 
 The way to check the smallest and largest timestamp is as follows:
 
