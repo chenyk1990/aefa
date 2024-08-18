@@ -37,6 +37,8 @@ BibTeX:
 Using the latest version
 
     git clone https://github.com/chenyk1990/aefa
+    cd aefa
+    pip install -v -e .
 
 -----------
 ## Download
