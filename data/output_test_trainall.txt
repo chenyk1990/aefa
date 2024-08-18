@@ -1,0 +1,616 @@
+ista=EM_101, ic=1/308
+ista=EM_101,acc=0.619048
+ista=EM_105, ic=2/308
+ista=EM_105,acc=0.619048
+ista=EM_106, ic=3/308
+ista=EM_106,acc=0.52381
+ista=EM_107, ic=4/308
+ista=EM_107,acc=0.666667
+ista=EM_109, ic=5/308
+ista=EM_109,acc=0.52381
+ista=EM_113, ic=6/308
+ista=EM_113,acc=0.619048
+ista=EM_115, ic=7/308
+ista=EM_115,acc=0.571429
+ista=EM_116, ic=8/308
+ista=EM_116,acc=0.666667
+ista=EM_119, ic=9/308
+ista=EM_119,acc=0.619048
+ista=EM_120, ic=10/308
+ista=EM_120,acc=0.619048
+ista=EM_121, ic=11/308
+ista=EM_121,acc=0.619048
+ista=EM_122, ic=12/308
+ista=EM_122,acc=0.619048
+ista=EM_124, ic=13/308
+ista=EM_124,acc=0.619048
+ista=EM_125, ic=14/308
+ista=EM_125,acc=0.619048
+ista=EM_127, ic=15/308
+ista=EM_127,acc=0.619048
+ista=EM_128, ic=16/308
+ista=EM_128,acc=0.380952
+ista=EM_129, ic=17/308
+ista=EM_129,acc=0.619048
+ista=EM_130, ic=18/308
+ista=EM_130,acc=0.47619
+ista=EM_131, ic=19/308
+ista=EM_131,acc=0.619048
+ista=EM_132, ic=20/308
+ista=EM_132,acc=0.619048
+ista=EM_133, ic=21/308
+ista=EM_133,acc=0.619048
+ista=EM_137, ic=22/308
+ista=EM_137,acc=0.428571
+ista=EM_138, ic=23/308
+ista=EM_138,acc=0.428571
+ista=EM_140, ic=24/308
+ista=EM_140,acc=0.619048
+ista=EM_141, ic=25/308
+ista=EM_141,acc=0.714286
+ista=EM_142, ic=26/308
+ista=EM_142,acc=0.619048
+ista=EM_146, ic=27/308
+ista=EM_146,acc=0.619048
+ista=EM_147, ic=28/308
+ista=EM_147,acc=0.714286
+ista=EM_148, ic=29/308
+ista=EM_148,acc=0.571429
+ista=EM_149, ic=30/308
+ista=EM_149,acc=0.380952
+ista=EM_150, ic=31/308
+ista=EM_150,acc=0.619048
+ista=EM_151, ic=32/308
+ista=EM_151,acc=0.619048
+ista=EM_152, ic=33/308
+ista=EM_152,acc=0.571429
+ista=EM_153, ic=34/308
+ista=EM_153,acc=0.571429
+ista=EM_155, ic=35/308
+ista=EM_155,acc=0.619048
+ista=EM_156, ic=36/308
+ista=EM_156,acc=0.571429
+ista=EM_159, ic=37/308
+ista=EM_159,acc=0.571429
+ista=EM_161, ic=38/308
+ista=EM_161,acc=0.666667
+ista=EM_164, ic=39/308
+ista=EM_164,acc=0.619048
+ista=EM_165, ic=40/308
+ista=EM_165,acc=0.619048
+ista=EM_166, ic=41/308
+ista=EM_166,acc=0.619048
+ista=EM_167, ic=42/308
+ista=EM_167,acc=0.47619
+ista=EM_169, ic=43/308
+ista=EM_169,acc=0.619048
+ista=EM_170, ic=44/308
+ista=EM_170,acc=0.571429
+ista=EM_171, ic=45/308
+ista=EM_171,acc=0.619048
+ista=EM_172, ic=46/308
+ista=EM_172,acc=0.47619
+ista=EM_174, ic=47/308
+ista=EM_174,acc=0.619048
+ista=EM_175, ic=48/308
+ista=EM_175,acc=0.47619
+ista=EM_177, ic=49/308
+ista=EM_177,acc=0.761905
+ista=EM_181, ic=50/308
+ista=EM_181,acc=0.47619
+ista=EM_182, ic=51/308
+ista=EM_182,acc=0.619048
+ista=EM_183, ic=52/308
+ista=EM_183,acc=0.619048
+ista=EM_184, ic=53/308
+ista=EM_184,acc=0.619048
+ista=EM_186, ic=54/308
+ista=EM_186,acc=0.619048
+ista=EM_188, ic=55/308
+ista=EM_188,acc=0.619048
+ista=EM_189, ic=56/308
+ista=EM_189,acc=0.619048
+ista=EM_19, ic=57/308
+ista=EM_19,acc=0.571429
+ista=EM_191, ic=58/308
+ista=EM_191,acc=0.619048
+ista=EM_193, ic=59/308
+ista=EM_193,acc=0.619048
+ista=EM_197, ic=60/308
+ista=EM_197,acc=0.619048
+ista=EM_198, ic=61/308
+ista=EM_198,acc=0.619048
+ista=EM_200, ic=62/308
+ista=EM_200,acc=0.619048
+ista=EM_201, ic=63/308
+ista=EM_201,acc=0.714286
+ista=EM_202, ic=64/308
+ista=EM_202,acc=0.619048
+ista=EM_204, ic=65/308
+ista=EM_204,acc=0.571429
+ista=EM_206, ic=66/308
+ista=EM_206,acc=0.619048
+ista=EM_212, ic=67/308
+ista=EM_212,acc=0.619048
+ista=EM_214, ic=68/308
+ista=EM_214,acc=0.619048
+ista=EM_220, ic=69/308
+ista=EM_220,acc=0.619048
+ista=EM_221, ic=70/308
+ista=EM_221,acc=0.428571
+ista=EM_223, ic=71/308
+ista=EM_223,acc=0.619048
+ista=EM_225, ic=72/308
+ista=EM_225,acc=0.47619
+ista=EM_226, ic=73/308
+ista=EM_226,acc=0.666667
+ista=EM_228, ic=74/308
+ista=EM_228,acc=0.619048
+ista=EM_229, ic=75/308
+ista=EM_229,acc=0.619048
+ista=EM_231, ic=76/308
+ista=EM_231,acc=0.52381
+ista=EM_235, ic=77/308
+ista=EM_235,acc=0.619048
+ista=EM_236, ic=78/308
+ista=EM_236,acc=0.761905
+ista=EM_238, ic=79/308
+ista=EM_238,acc=0.52381
+ista=EM_24, ic=80/308
+ista=EM_24,acc=0.619048
+ista=EM_240, ic=81/308
+ista=EM_240,acc=0.619048
+ista=EM_243, ic=82/308
+ista=EM_243,acc=0.619048
+ista=EM_246, ic=83/308
+ista=EM_246,acc=0.52381
+ista=EM_247, ic=84/308
+ista=EM_247,acc=0.571429
+ista=EM_250, ic=85/308
+ista=EM_250,acc=0.428571
+ista=EM_251, ic=86/308
+ista=EM_251,acc=0.52381
+ista=EM_252, ic=87/308
+ista=EM_252,acc=0.714286
+ista=EM_254, ic=88/308
+ista=EM_254,acc=0.619048
+ista=EM_255, ic=89/308
+ista=EM_255,acc=0.619048
+ista=EM_256, ic=90/308
+ista=EM_256,acc=0.619048
+ista=EM_26, ic=91/308
+ista=EM_26,acc=0.619048
+ista=EM_29, ic=92/308
+ista=EM_29,acc=0.52381
+ista=EM_302, ic=93/308
+ista=EM_302,acc=0.619048
+ista=EM_303, ic=94/308
+ista=EM_303,acc=0.571429
+ista=EM_304, ic=95/308
+ista=EM_304,acc=0.571429
+ista=EM_305, ic=96/308
+ista=EM_305,acc=0.619048
+ista=EM_306, ic=97/308
+ista=EM_306,acc=0.380952
+ista=EM_307, ic=98/308
+ista=EM_307,acc=0.619048
+ista=EM_308, ic=99/308
+ista=EM_308,acc=0.619048
+ista=EM_309, ic=100/308
+ista=EM_309,acc=0.619048
+ista=EM_313, ic=101/308
+ista=EM_313,acc=0.571429
+ista=EM_314, ic=102/308
+ista=EM_314,acc=0.619048
+ista=EM_315, ic=103/308
+ista=EM_315,acc=0.380952
+ista=EM_316, ic=104/308
+ista=EM_316,acc=0.619048
+ista=EM_317, ic=105/308
+ista=EM_317,acc=0.666667
+ista=EM_318, ic=106/308
+ista=EM_318,acc=0.666667
+ista=EM_319, ic=107/308
+ista=EM_319,acc=0.571429
+ista=EM_32, ic=108/308
+ista=EM_32,acc=0.619048
+ista=EM_320, ic=109/308
+ista=EM_320,acc=0.619048
+ista=EM_321, ic=110/308
+ista=EM_321,acc=0.571429
+ista=EM_322, ic=111/308
+ista=EM_322,acc=0.571429
+ista=EM_324, ic=112/308
+ista=EM_324,acc=0.619048
+ista=EM_326, ic=113/308
+ista=EM_326,acc=0.571429
+ista=EM_327, ic=114/308
+ista=EM_327,acc=0.619048
+ista=EM_328, ic=115/308
+ista=EM_328,acc=0.619048
+ista=EM_329, ic=116/308
+ista=EM_329,acc=0.619048
+ista=EM_33, ic=117/308
+ista=EM_33,acc=0.571429
+ista=EM_331, ic=118/308
+ista=EM_331,acc=0.47619
+ista=EM_332, ic=119/308
+ista=EM_332,acc=0.619048
+ista=EM_333, ic=120/308
+ista=EM_333,acc=0.666667
+ista=EM_334, ic=121/308
+ista=EM_334,acc=0.619048
+ista=EM_335, ic=122/308
+ista=EM_335,acc=0.619048
+ista=EM_339, ic=123/308
+ista=EM_339,acc=0.619048
+ista=EM_35, ic=124/308
+ista=EM_35,acc=0.571429
+ista=EM_352, ic=125/308
+ista=EM_352,acc=0.333333
+ista=EM_355, ic=126/308
+ista=EM_355,acc=0.619048
+ista=EM_36, ic=127/308
+ista=EM_36,acc=0.619048
+ista=EM_38, ic=128/308
+ista=EM_38,acc=0.619048
+ista=EM_39, ic=129/308
+ista=EM_39,acc=0.47619
+ista=EM_40047, ic=130/308
+ista=EM_40047,acc=0.619048
+ista=EM_41, ic=131/308
+ista=EM_41,acc=0.619048
+ista=EM_43, ic=132/308
+ista=EM_43,acc=0.571429
+ista=EM_47, ic=133/308
+ista=EM_47,acc=0.619048
+ista=EM_48, ic=134/308
+ista=EM_48,acc=0.619048
+ista=EM_50117, ic=135/308
+ista=EM_50117,acc=0.47619
+ista=EM_51, ic=136/308
+ista=EM_51,acc=0.619048
+ista=EM_55, ic=137/308
+ista=EM_55,acc=0.571429
+ista=EM_59, ic=138/308
+ista=EM_59,acc=0.619048
+ista=EM_60139, ic=139/308
+ista=EM_60139,acc=0.619048
+ista=EM_60157, ic=140/308
+ista=EM_60157,acc=0.380952
+ista=EM_60195, ic=141/308
+ista=EM_60195,acc=0.619048
+ista=EM_60241, ic=142/308
+ista=EM_60241,acc=0.619048
+ista=EM_60251, ic=143/308
+ista=EM_60251,acc=0.666667
+ista=EM_73, ic=144/308
+ista=EM_73,acc=0.619048
+ista=EM_75, ic=145/308
+ista=EM_75,acc=0.52381
+ista=EM_77, ic=146/308
+ista=EM_77,acc=0.666667
+ista=EM_78, ic=147/308
+ista=EM_78,acc=0.619048
+ista=EM_82, ic=148/308
+ista=EM_82,acc=0.619048
+ista=EM_84, ic=149/308
+ista=EM_84,acc=0.619048
+ista=EM_87, ic=150/308
+ista=EM_87,acc=0.619048
+ista=EM_88, ic=151/308
+ista=EM_88,acc=0.47619
+ista=EM_90, ic=152/308
+ista=EM_90,acc=0.666667
+ista=EM_91, ic=153/308
+ista=EM_91,acc=0.666667
+ista=EM_93, ic=154/308
+ista=EM_93,acc=0.619048
+ista=EM_94, ic=155/308
+ista=EM_94,acc=0.619048
+ista=EM_96, ic=156/308
+ista=EM_96,acc=0.52381
+ista=EM_98, ic=157/308
+ista=EM_98,acc=0.619048
+ista=EM_99, ic=158/308
+ista=EM_99,acc=0.619048
+ista=GA_101, ic=159/308
+ista=GA_101,acc=0.619048
+ista=GA_105, ic=160/308
+ista=GA_105,acc=0.619048
+ista=GA_106, ic=161/308
+ista=GA_106,acc=0.619048
+ista=GA_107, ic=162/308
+ista=GA_107,acc=0.52381
+ista=GA_109, ic=163/308
+ista=GA_109,acc=0.714286
+ista=GA_113, ic=164/308
+ista=GA_113,acc=0.619048
+ista=GA_115, ic=165/308
+ista=GA_115,acc=0.619048
+ista=GA_116, ic=166/308
+ista=GA_116,acc=0.619048
+ista=GA_119, ic=167/308
+ista=GA_119,acc=0.619048
+ista=GA_120, ic=168/308
+ista=GA_120,acc=0.619048
+ista=GA_121, ic=169/308
+ista=GA_121,acc=0.619048
+ista=GA_122, ic=170/308
+ista=GA_122,acc=0.619048
+ista=GA_124, ic=171/308
+ista=GA_124,acc=0.571429
+ista=GA_125, ic=172/308
+ista=GA_125,acc=0.619048
+ista=GA_127, ic=173/308
+ista=GA_127,acc=0.619048
+ista=GA_128, ic=174/308
+ista=GA_128,acc=0.380952
+ista=GA_129, ic=175/308
+ista=GA_129,acc=0.52381
+ista=GA_130, ic=176/308
+ista=GA_130,acc=0.571429
+ista=GA_131, ic=177/308
+ista=GA_131,acc=0.52381
+ista=GA_132, ic=178/308
+ista=GA_132,acc=0.619048
+ista=GA_133, ic=179/308
+ista=GA_133,acc=0.619048
+ista=GA_137, ic=180/308
+ista=GA_137,acc=0.428571
+ista=GA_138, ic=181/308
+ista=GA_138,acc=0.428571
+ista=GA_140, ic=182/308
+ista=GA_140,acc=0.619048
+ista=GA_141, ic=183/308
+ista=GA_141,acc=0.619048
+ista=GA_142, ic=184/308
+ista=GA_142,acc=0.619048
+ista=GA_146, ic=185/308
+ista=GA_146,acc=0.619048
+ista=GA_147, ic=186/308
+ista=GA_147,acc=0.619048
+ista=GA_148, ic=187/308
+ista=GA_148,acc=0.619048
+ista=GA_150, ic=188/308
+ista=GA_150,acc=0.619048
+ista=GA_151, ic=189/308
+ista=GA_151,acc=0.52381
+ista=GA_152, ic=190/308
+ista=GA_152,acc=0.571429
+ista=GA_155, ic=191/308
+ista=GA_155,acc=0.619048
+ista=GA_156, ic=192/308
+ista=GA_156,acc=0.619048
+ista=GA_159, ic=193/308
+ista=GA_159,acc=0.571429
+ista=GA_161, ic=194/308
+ista=GA_161,acc=0.52381
+ista=GA_164, ic=195/308
+ista=GA_164,acc=0.619048
+ista=GA_165, ic=196/308
+ista=GA_165,acc=0.619048
+ista=GA_166, ic=197/308
+ista=GA_166,acc=0.619048
+ista=GA_167, ic=198/308
+ista=GA_167,acc=0.47619
+ista=GA_169, ic=199/308
+ista=GA_169,acc=0.619048
+ista=GA_170, ic=200/308
+ista=GA_170,acc=0.52381
+ista=GA_171, ic=201/308
+ista=GA_171,acc=0.52381
+ista=GA_172, ic=202/308
+ista=GA_172,acc=0.428571
+ista=GA_174, ic=203/308
+ista=GA_174,acc=0.619048
+ista=GA_177, ic=204/308
+ista=GA_177,acc=0.619048
+ista=GA_181, ic=205/308
+ista=GA_181,acc=0.619048
+ista=GA_182, ic=206/308
+ista=GA_182,acc=0.619048
+ista=GA_183, ic=207/308
+ista=GA_183,acc=0.619048
+ista=GA_184, ic=208/308
+ista=GA_184,acc=0.619048
+ista=GA_186, ic=209/308
+ista=GA_186,acc=0.571429
+ista=GA_188, ic=210/308
+ista=GA_188,acc=0.619048
+ista=GA_19, ic=211/308
+ista=GA_19,acc=0.52381
+ista=GA_191, ic=212/308
+ista=GA_191,acc=0.619048
+ista=GA_193, ic=213/308
+ista=GA_193,acc=0.571429
+ista=GA_198, ic=214/308
+ista=GA_198,acc=0.571429
+ista=GA_201, ic=215/308
+ista=GA_201,acc=0.619048
+ista=GA_202, ic=216/308
+ista=GA_202,acc=0.619048
+ista=GA_204, ic=217/308
+ista=GA_204,acc=0.619048
+ista=GA_206, ic=218/308
+ista=GA_206,acc=0.52381
+ista=GA_212, ic=219/308
+ista=GA_212,acc=0.428571
+ista=GA_214, ic=220/308
+ista=GA_214,acc=0.619048
+ista=GA_220, ic=221/308
+ista=GA_220,acc=0.619048
+ista=GA_221, ic=222/308
+ista=GA_221,acc=0.52381
+ista=GA_223, ic=223/308
+ista=GA_223,acc=0.666667
+ista=GA_225, ic=224/308
+ista=GA_225,acc=0.619048
+ista=GA_228, ic=225/308
+ista=GA_228,acc=0.47619
+ista=GA_229, ic=226/308
+ista=GA_229,acc=0.619048
+ista=GA_231, ic=227/308
+ista=GA_231,acc=0.571429
+ista=GA_235, ic=228/308
+ista=GA_235,acc=0.619048
+ista=GA_236, ic=229/308
+ista=GA_236,acc=0.619048
+ista=GA_238, ic=230/308
+ista=GA_238,acc=0.47619
+ista=GA_24, ic=231/308
+ista=GA_24,acc=0.47619
+ista=GA_240, ic=232/308
+ista=GA_240,acc=0.47619
+ista=GA_243, ic=233/308
+ista=GA_243,acc=0.619048
+ista=GA_246, ic=234/308
+ista=GA_246,acc=0.714286
+ista=GA_247, ic=235/308
+ista=GA_247,acc=0.52381
+ista=GA_250, ic=236/308
+ista=GA_250,acc=0.619048
+ista=GA_251, ic=237/308
+ista=GA_251,acc=0.666667
+ista=GA_252, ic=238/308
+ista=GA_252,acc=0.666667
+ista=GA_254, ic=239/308
+ista=GA_254,acc=0.619048
+ista=GA_255, ic=240/308
+ista=GA_255,acc=0.619048
+ista=GA_256, ic=241/308
+ista=GA_256,acc=0.619048
+ista=GA_26, ic=242/308
+ista=GA_26,acc=0.571429
+ista=GA_29, ic=243/308
+ista=GA_29,acc=0.619048
+ista=GA_302, ic=244/308
+ista=GA_302,acc=0.619048
+ista=GA_303, ic=245/308
+ista=GA_303,acc=0.619048
+ista=GA_304, ic=246/308
+ista=GA_304,acc=0.571429
+ista=GA_305, ic=247/308
+ista=GA_305,acc=0.619048
+ista=GA_306, ic=248/308
+ista=GA_306,acc=0.380952
+ista=GA_307, ic=249/308
+ista=GA_307,acc=0.52381
+ista=GA_308, ic=250/308
+ista=GA_308,acc=0.571429
+ista=GA_309, ic=251/308
+ista=GA_309,acc=0.619048
+ista=GA_310, ic=252/308
+ista=GA_310,acc=0.619048
+ista=GA_313, ic=253/308
+ista=GA_313,acc=0.666667
+ista=GA_314, ic=254/308
+ista=GA_314,acc=0.619048
+ista=GA_315, ic=255/308
+ista=GA_315,acc=0.380952
+ista=GA_316, ic=256/308
+ista=GA_316,acc=0.52381
+ista=GA_317, ic=257/308
+ista=GA_317,acc=0.619048
+ista=GA_318, ic=258/308
+ista=GA_318,acc=0.619048
+ista=GA_319, ic=259/308
+ista=GA_319,acc=0.52381
+ista=GA_32, ic=260/308
+ista=GA_32,acc=0.52381
+ista=GA_320, ic=261/308
+ista=GA_320,acc=0.619048
+ista=GA_321, ic=262/308
+ista=GA_321,acc=0.52381
+ista=GA_322, ic=263/308
+ista=GA_322,acc=0.619048
+ista=GA_324, ic=264/308
+ista=GA_324,acc=0.619048
+ista=GA_326, ic=265/308
+ista=GA_326,acc=0.571429
+ista=GA_328, ic=266/308
+ista=GA_328,acc=0.619048
+ista=GA_329, ic=267/308
+ista=GA_329,acc=0.619048
+ista=GA_33, ic=268/308
+ista=GA_33,acc=0.619048
+ista=GA_331, ic=269/308
+ista=GA_331,acc=0.52381
+ista=GA_333, ic=270/308
+ista=GA_333,acc=0.380952
+ista=GA_334, ic=271/308
+ista=GA_334,acc=0.619048
+ista=GA_335, ic=272/308
+ista=GA_335,acc=0.619048
+ista=GA_339, ic=273/308
+ista=GA_339,acc=0.619048
+ista=GA_35, ic=274/308
+ista=GA_35,acc=0.52381
+ista=GA_352, ic=275/308
+ista=GA_352,acc=0.333333
+ista=GA_355, ic=276/308
+ista=GA_355,acc=0.619048
+ista=GA_36, ic=277/308
+ista=GA_36,acc=0.619048
+ista=GA_38, ic=278/308
+ista=GA_38,acc=0.619048
+ista=GA_39, ic=279/308
+ista=GA_39,acc=0.47619
+ista=GA_40047, ic=280/308
+ista=GA_40047,acc=0.666667
+ista=GA_41, ic=281/308
+ista=GA_41,acc=0.619048
+ista=GA_43, ic=282/308
+ista=GA_43,acc=0.666667
+ista=GA_47, ic=283/308
+ista=GA_47,acc=0.619048
+ista=GA_48, ic=284/308
+ista=GA_48,acc=0.666667
+ista=GA_50117, ic=285/308
+ista=GA_50117,acc=0.47619
+ista=GA_51, ic=286/308
+ista=GA_51,acc=0.619048
+ista=GA_55, ic=287/308
+ista=GA_55,acc=0.619048
+ista=GA_59, ic=288/308
+ista=GA_59,acc=0.619048
+ista=GA_60139, ic=289/308
+ista=GA_60139,acc=0.619048
+ista=GA_60157, ic=290/308
+ista=GA_60157,acc=0.428571
+ista=GA_60195, ic=291/308
+ista=GA_60195,acc=0.619048
+ista=GA_60241, ic=292/308
+ista=GA_60241,acc=0.619048
+ista=GA_60251, ic=293/308
+ista=GA_60251,acc=0.571429
+ista=GA_73, ic=294/308
+ista=GA_73,acc=0.571429
+ista=GA_75, ic=295/308
+ista=GA_75,acc=0.619048
+ista=GA_77, ic=296/308
+ista=GA_77,acc=0.571429
+ista=GA_78, ic=297/308
+ista=GA_78,acc=0.619048
+ista=GA_82, ic=298/308
+ista=GA_82,acc=0.619048
+ista=GA_84, ic=299/308
+ista=GA_84,acc=0.619048
+ista=GA_87, ic=300/308
+ista=GA_87,acc=0.571429
+ista=GA_88, ic=301/308
+ista=GA_88,acc=0.571429
+ista=GA_90, ic=302/308
+ista=GA_90,acc=0.619048
+ista=GA_91, ic=303/308
+ista=GA_91,acc=0.619048
+ista=GA_93, ic=304/308
+ista=GA_93,acc=0.380952
+ista=GA_94, ic=305/308
+ista=GA_94,acc=0.619048
+ista=GA_96, ic=306/308
+ista=GA_96,acc=0.619048
+ista=GA_98, ic=307/308
+ista=GA_98,acc=0.47619
+ista=GA_99, ic=308/308
+ista=GA_99,acc=0.380952
