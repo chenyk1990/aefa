@@ -358,7 +358,7 @@ The way to check the smallest and largest timestamp is as follows:
 	print('Minimum timestamp is %d and maximum timestamp is %d'%(m1,m2));
 	print('Minimum time samples in UTC is %s and maximum timestamp is %s'%(UTCDateTime(m1+8*60*60),UTCDateTime(m2+8*60*60)));
 
-The 'timeindex' attribute value is always 28800 (8*60*60) than the 'time' attribute value (real UTC time in floating NO)
+The 'timeindex' attribute value is always 28800 (8\*60\*60) than the 'time' attribute value (real UTC time in floating NO)
 
 -----------
 ## Gallery
