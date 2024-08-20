@@ -269,6 +269,27 @@ Plot all events onto the above figures.
 
 <img src='https://github.com/chenyk1990/gallery/blob/main/aefa/em101ev.png' alt='Slicing' width=960/>
 <img src='https://github.com/chenyk1990/gallery/blob/main/aefa/ga101ev.png' alt='Slicing' width=960/>
+
+
+Extract the data matrix from an arbitrary testing week.
+
+	import h5py
+	import matplotlib.pyplot as plt
+ 
+	f = h5py.File("AEFA.h5", 'r')
+	idx='WK_01'
+	ista='EM_101'
+	keywords=list(f.get(idx).keys())
+	ems=[ii for ii in keywords if ii[0:2]=='EM']
+	gas=[ii for ii in keywords if ii[0:2]=='GA']
+
+	emname=[ii for ii in ems if ii.split("_")[-1]==ista.split("_")[-1] ]
+	if len(emname) > 0:
+		data_em=np.array(f.get(idx).get(emname[0])['data'])
+		plt.imshow(data_em,clim=(-100,100),cmap='jet',aspect='auto',extent=[0,data_em.shape[1],data_em.shape[0],0])
+		plt.xlabel('Feature #');plt.ylabel('Sample #');plt.title('%s'%emname[0])
+		plt.show()
+
 -----------
 ## Development
     The development team welcomes voluntary contributions from any open-source enthusiast. 
@@ -286,7 +307,7 @@ Plot all events onto the above figures.
 
 Each EM station (e.g., EM_101) has a 205920 x 51 array. 
 51 indicates 51 EM features detailed in Chen et al. (2025), 205920 indicates (204 weeks + 2 days)'s feature recordings. 
-A simple math gives: 205920 = 204*7*24*6 + 2*24*6;
+A simple math gives: 205920 = 204\*7\*24*6 + 2\*24\*6;
 try:
 
 	import h5py;import numpy as np;
@@ -298,7 +319,7 @@ try:
 
 Similarly, for each GA station (e.g., GA_101) has a 205920 x 44 array. 
 44 indicates 44 GA features detailed in Chen et al. (2025), 205920 indicates (204 weeks + 2 days)'s feature recordings. 
-A simple math gives: 205920 = 204*7*24*6 + 2*24*6;
+A simple math gives: 205920 = 204\*7\*24\*6 + 2\*24\*6;
 try:
 
 	import h5py;import numpy as np;
