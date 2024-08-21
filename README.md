@@ -84,6 +84,19 @@ Print event (idth) information in AEFA
 	print('AEFA event attributes are:',dataset.attrs.keys())
 	print('longitude=%g,latitude=%g,magnitude=%g,time=%s,week=%d'%(dataset.attrs['ev_longitude'],dataset.attrs['ev_latitude'],dataset.attrs['ev_magnitude'],dataset.attrs['ev_time'],dataset.attrs['ev_week']))
 
+Print feature names in AEFA
+	import h5py
+	import numpy as np
+	f = h5py.File("AEFA.h5", 'r')
+	dataset = f.get('FeatureEM')
+	features=np.array(dataset['features'],dtype='str')
+	print('There are %d EM features'%len(features),' they are:',list(features))
+
+
+	dataset = f.get('FeatureGA')
+	features=np.array(dataset['features'],dtype='str')
+	print('There are %d GA features'%len(features),' they are:',list(features))
+ 
 Plot Events (quickly) of AEFA
 
 	import h5py
