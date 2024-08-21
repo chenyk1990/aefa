@@ -302,6 +302,66 @@ Extract the data matrix from an arbitrary testing week.
 		plt.xlabel('Feature #');plt.ylabel('Sample #');plt.title('%s'%emname[0])
 		plt.show()
 
+
+Print all the keys for an arbitrary testing week (e.g., WK_05).
+
+	import h5py
+	f = h5py.File("AEFA.h5", 'r')
+	print(f.get('WK_05').keys())
+
+Print the Label info for an arbitrary testing week without earthquakes in the next week (e.g., WK_01).
+
+	print('Week range:',list(f.get('WK_01').keys())[0].split("_")[1])
+	print('Label keys:',f.get('WK_01').get('Label_EV').attrs.keys())
+	print('Number of label attributes:',f.get('WK_05').get('Label_EV').attrs.__len__())
+	print('yesno:',f.get('WK_01').get('Label_EV').attrs['yesno'])
+	print('magnitude:',f.get('WK_01').get('Label_EV').attrs['ev_magnitude'])
+	print('time:',f.get('WK_01').get('Label_EV').attrs['ev_time'])
+	print('depth:',f.get('WK_01').get('Label_EV').attrs['ev_depth'])
+	print('week:',f.get('WK_01').get('Label_EV').attrs['ev_week'])
+	print('longitude:',f.get('WK_01').get('Label_EV').attrs['ev_longitude'])
+	print('latitude:',f.get('WK_01').get('Label_EV').attrs['ev_latitude'])
+ 
+Print the Label info for an arbitrary testing week with one earthquake in the next week (e.g., WK_05).
+
+	print('Week range:',list(f.get('WK_05').keys())[0].split("_")[1])
+	print('Label keys:',f.get('WK_05').get('Label_EV').attrs.keys())
+	print('Number of label attributes:',f.get('WK_05').get('Label_EV').attrs.__len__())
+	print('yesno:',f.get('WK_05').get('Label_EV').attrs['yesno'])
+	print('magnitude:',f.get('WK_05').get('Label_EV').attrs['ev_magnitude'])
+	print('time:',f.get('WK_05').get('Label_EV').attrs['ev_time'])
+	print('depth:',f.get('WK_05').get('Label_EV').attrs['ev_depth'])
+	print('week:',f.get('WK_05').get('Label_EV').attrs['ev_week'])
+	print('longitude:',f.get('WK_05').get('Label_EV').attrs['ev_longitude'])
+	print('latitude:',f.get('WK_05').get('Label_EV').attrs['ev_latitude'])
+
+Print the Label info for an arbitrary testing week with multiple (>1) earthquakes in the next week (e.g., WK_07).
+
+	print('Week range:',list(f.get('WK_07').keys())[0].split("_")[1])
+	print('Label keys:',f.get('WK_07').get('Label_EV').attrs.keys())
+	print('Number of label attributes:',f.get('WK_07').get('Label_EV').attrs.__len__())
+	print('yesno:',f.get('WK_07').get('Label_EV').attrs['yesno'])
+	print('magnitude:',f.get('WK_07').get('Label_EV').attrs['ev_magnitude'])
+	print('time:',f.get('WK_07').get('Label_EV').attrs['ev_time'])
+	print('depth:',f.get('WK_07').get('Label_EV').attrs['ev_depth'])
+	print('week:',f.get('WK_07').get('Label_EV').attrs['ev_week'])
+	print('longitude:',f.get('WK_07').get('Label_EV').attrs['ev_longitude'])
+	print('latitude:',f.get('WK_07').get('Label_EV').attrs['ev_latitude'])
+
+	Neqs=len(f.get('WK_07').get('Label_EV').keys())
+	keys=list(f.get('WK_07').get('Label_EV').keys())
+	print('Number of EQs in the next week:',Neqs)
+	print('EQs in the next week:',keys)
+
+	for ii in range(Neqs):
+		print('%s:'%keys[ii],f.get('WK_07').get('Label_EV').get(keys[ii]).attrs.keys())
+		print('magnitude:',f.get('WK_07').get('Label_EV').get(keys[ii]).attrs['ev_magnitude'])
+		print('time:',f.get('WK_07').get('Label_EV').get(keys[ii]).attrs['ev_time'])
+		print('depth:',f.get('WK_07').get('Label_EV').get(keys[ii]).attrs['ev_depth'])
+		print('week:',f.get('WK_07').get('Label_EV').get(keys[ii]).attrs['ev_week'])
+		print('longitude:',f.get('WK_07').get('Label_EV').get(keys[ii]).attrs['ev_longitude'])
+		print('latitude:',f.get('WK_07').get('Label_EV').get(keys[ii]).attrs['ev_latitude'])
+
 -----------
 ## Development
     The development team welcomes voluntary contributions from any open-source enthusiast. 
