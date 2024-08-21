@@ -194,7 +194,7 @@ Calculate the time sample NO shown in the above x axes from an arbitrary time in
 	keys=[ii for ii in keys if ii[0:2]=='GA']
 	idx=keys[0]
 	dataset = f.get(idx)
-	sample_min=int((dataset['time'][0]-float(t0))/(60*10))
+	sample_min=int((dataset['timeindex'][0]-float(t0))/(60*10))
 	print('Minimum sample in station %s is %d'%(dataset.attrs['station'],sample_min))
 
 Plot all events onto the above figures.
@@ -342,22 +342,18 @@ Suppose we have an arbitrary UTC time t1 (e.g., UTCDateTime(2017, 1, 1, 0, 0, 20
 	timestamp=(t1-t0) + 1483200000 
 	print('The smallest timestamp is %d'%1483200000)
 
-Or
+Or get it directly
 	
 	import h5py;import numpy as np;
 	from obspy.core.utcdatetime import UTCDateTime
 	f = h5py.File("AEFA.h5", 'r');
 	keys=list(f.keys());keys=[ii for ii in keys if ii=='GA_101'];
 	idx=keys[0];dataset = f.get(idx);
-	data = np.array(dataset['data']);
-	time=np.array(dataset['time'],dtype='float')
-	t0=UTCDateTime(2017, 1, 1, 0, 0, 0);
-	timestamp_cal=[UTCDateTime(ii)-t0 + 1483200000  for ii in time]
 	timestamp=np.array(dataset['timeindex'],dtype='float')
-	print('Difference is %g'%np.linalg.norm(timestamp_cal-timestamp))
+	print('The smallest timestamp is %d'%timestamp.min())
   	
 
-Suppose we have an arbitrary timestamp (e.g., 1483200000), the way to calculate the UTC time is
+Suppose we have an arbitrary timestamp (e.g., 1483200000), the way to calculate the CST time (UTC time + 8 hours) is
 
 	from obspy.core.utcdatetime import UTCDateTime
 	timestamp=1483200000
@@ -379,7 +375,7 @@ The way to check the smallest and largest timestamp is as follows:
 	print('Minimum timestamp is %d and maximum timestamp is %d'%(m1,m2));
 	print('Minimum time samples in UTC is %s and maximum timestamp is %s'%(UTCDateTime(m1+8*60*60),UTCDateTime(m2+8*60*60)));
 
-The 'timeindex' attribute value is always 28800 (8\*60\*60) than the 'time' attribute value (real UTC time in floating NO)
+The 'timeindex' attribute value is the timestamp value. Existence of a certain timestamp means the data is recorded at that timestamp.
 
 -----------
 ## Gallery
