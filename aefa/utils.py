@@ -264,3 +264,39 @@ def get_label(aefapath='./'):
 	labclass = np.array(labclass)	
 
 	return labclass
+	
+	
+def get_time():
+	'''
+	get_time: get the time axis for AEFA
+	
+	The length of the time vector is 205920
+	The format of time is UTC time format but in local time (CST = UTC + 8 hours)
+	
+	Written by Yangkang Chen
+	Aug, 21, 2024
+	
+	EXAMPLE
+	from aefa import get_time
+	times=get_time()
+	print(times[0],times[-1])
+	
+	'''
+	from obspy.core.utcdatetime import UTCDateTime
+	import numpy as np
+	
+	##########################################################################################
+	## Set up week
+	##########################################################################################
+	contime= 8 * 60 *60
+	t0 = UTCDateTime(1483200000+contime) 	#begin time: 2017-01-01T00:00:00.000000Z
+	tend = UTCDateTime(1606751400+contime) 	#end time: 2020-11-30T23:50:00.000000Z
+	t0, tend
+	
+	nsample=204*7*24*6+2*24*6; #205920
+	
+	timestamps=np.linspace(1483200000+contime,1606751400+contime,nsample);
+	
+	times=[UTCDateTime(ii) for ii in timestamps]
+	
+	return times

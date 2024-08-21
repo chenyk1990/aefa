@@ -21,7 +21,7 @@ weeks=[]
 for ii in range(len(keys)):
 	idx='EV_%d'%(ii+1)
 	print(idx)
-	weeks.append(f.get(idx).attrs['ev_week']-13)
+	weeks.append(f.get(idx).attrs['ev_week'])
 print('Week NO min=',min(weeks),'max=',max(weeks))
 
 lons=[]
