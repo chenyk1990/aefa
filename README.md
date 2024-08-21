@@ -329,8 +329,8 @@ try:
 	data = np.array(dataset['data']);
 	print(data.shape) #(205920, 44);
 
-The starting time for the AEFA training data is 2017-01-01T00:00:00.000000Z (Sunday);
-the ending time is 2020-11-30T23:50:00.000000Z (Monday); (1430 days in total);
+The starting time (local CST, UTC+8) for the AEFA training data is 2017-01-01T00:00:00.000000Z (Sunday);
+the ending time (local CST, UTC+8) is 2020-11-30T23:50:00.000000Z (Monday); (1430 days in total);
 Features are given 0 values if the sensors malfunction at any time sample.
 
 

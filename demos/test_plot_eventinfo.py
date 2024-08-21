@@ -21,7 +21,8 @@ weeks=[]
 for ii in range(len(keys)):
 	idx='EV_%d'%(ii+1)
 	print(idx)
-	weeks.append(f.get(idx).attrs['ev_week'])
+	weeks.append(f.get(idx).attrs['ev_week']-13)
+print('Week NO min=',min(weeks),'max=',max(weeks))
 
 lons=[]
 for ii in range(len(keys)):
@@ -45,7 +46,8 @@ plt.xlabel('Event NO')
 plt.ylabel('Magnitude (Ml)')
 
 plt.title('Magnitudes of the training data')
-# plt.gca().text(-0.15,1,'(a)',transform=plt.gca().transAxes,size=20,weight='normal')
+plt.gca().text(-0.18,1,'(a)',transform=plt.gca().transAxes,size=20,weight='normal')
+# plt.gca().text(-0.18,1,'(a)',transform=plt.gca().transAxes,size=20,weight='normal')
 # plt.ylabel('Sample')
 # plt.colorbar(orientation='vertical',shrink=0.6,label='1:filled/0:empty');
 
@@ -57,6 +59,7 @@ plt.plot(eventids,weeks,'-o',color='k',markersize=8, alpha=0.3)
 plt.xlabel('Event NO');
 plt.ylabel('Week NO')
 plt.title('Occurence weeks of the training data')
+plt.gca().text(-0.18,1,'(b)',transform=plt.gca().transAxes,size=20,weight='normal')
 
 plt.subplot(2,3,4)
 plt.hist(lons,10,label='Longitude distribution',color='b')
@@ -65,6 +68,7 @@ plt.gca().set_xlim(xmin=98,xmax=108);
 plt.gca().legend(loc='upper right');
 plt.gca().set_ylabel("Count",fontsize='large', fontweight='normal')
 plt.gca().set_xlabel("Longitude (deg)",fontsize='large', fontweight='normal')
+plt.gca().text(-0.18,1,'(c)',transform=plt.gca().transAxes,size=20,weight='normal')
 
 plt.subplot(2,3,5)
 plt.hist(lats,10,label='Latitude distribution',color='b')
@@ -72,7 +76,7 @@ plt.gca().set_xlim(xmin=22,xmax=34);
 plt.gca().legend(loc='upper right');
 plt.gca().set_ylabel("Count",fontsize='large', fontweight='normal')
 plt.gca().set_xlabel("Latitude (deg)",fontsize='large', fontweight='normal')
-
+plt.gca().text(-0.18,1,'(d)',transform=plt.gca().transAxes,size=20,weight='normal')
 
 plt.subplot(2,3,6)
 plt.hist(mags,10,label='Magnitude',color='b')
@@ -80,7 +84,7 @@ plt.gca().set_xlim(xmin=2,xmax=8);
 plt.gca().legend(loc='upper right');
 plt.gca().set_ylabel("Count",fontsize='large', fontweight='normal')
 plt.gca().set_xlabel("Magnitude (Ml)",fontsize='large', fontweight='normal')
-
+plt.gca().text(-0.18,1,'(e)',transform=plt.gca().transAxes,size=20,weight='normal')
 
 plt.savefig('test_plot_eventinfo.png',format='png',dpi=300)
 plt.show() 
