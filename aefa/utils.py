@@ -202,7 +202,7 @@ def get_label(aefapath='./'):
 	Longall=[]
 	Latall=[]
 	magall=[]
-	for s in range(3,len(keys)):
+	for s in range(0,len(keys)):
 		dataset = f.get(keys[s])
 		mag=[]
 		Lat=[]
@@ -223,7 +223,6 @@ def get_label(aefapath='./'):
 		Longall.append(Long)
 		Latall.append(Lat)
 	
-
 		magweek = np.zeros_like(tweek_lab)
 		latweek = np.zeros_like(tweek_lab)
 		longweek = np.zeros_like(tweek_lab)
