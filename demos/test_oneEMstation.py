@@ -22,13 +22,14 @@ c=0
 for cv in range(0,int(v)):
     c =t0 + (cv*7*24*60*60)
     tweek.append(c)
-# print(tweek)
+print(tweek)
 
 ##########################################################################################
 ##extract info from h5 file
 ##########################################################################################
-import h5py
-f = h5py.File("AEFA.h5", 'r')
+import h5py,os
+aefapath=os.getenv('HOME')+'/DATALIB/AEFA.h5'
+f = h5py.File(aefapath, 'r')
 keys=list(f.keys())
 # id=2 #event NO
 keys=[ii for ii in keys if ii[0:2]=='EV']
@@ -115,7 +116,7 @@ ista=193 #ACC:0.7619047619047619
 dataset = f.get('EM_%d'%ista)
 print('It has these datasets',dataset.keys())
 dataset['data']
-dataset['time']
+# dataset['time']
 dataset['timeindex']
 
 if 1:
