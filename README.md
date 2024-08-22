@@ -282,6 +282,14 @@ Plot all events onto the above figures.
 <img src='https://github.com/chenyk1990/gallery/blob/main/aefa/em101ev.png' alt='Slicing' width=960/>
 <img src='https://github.com/chenyk1990/gallery/blob/main/aefa/ga101ev.png' alt='Slicing' width=960/>
 
+Extracting the local time in UTC format following an abnormal pattern in the feature plots
+
+	from aefa import get_time
+	times=get_time()
+	isample=185000
+	print('Time of interest is',times[isample])
+
+Output: Time of interest is 2020-07-08T17:20:00.000000Z
 
 Extract the data matrix from an arbitrary testing week.
 
