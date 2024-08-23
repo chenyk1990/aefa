@@ -54,10 +54,11 @@ gas=[ii for ii in keywords if ii[0:2]=='GA']
 # ems=['EM_193','EM_106']
 # # gas=gas[0:2]
 # # ems=[]
-# gas=['EM_88']
+# gas=['GA_101']
+
+gas=['GA_101']
 ic=0
-# ems=[]
-for ista in ems+gas:
+for ista in gas:
 	ic=ic+1;
 	print('ista=%s, ic=%d/%d'%(ista,ic,len(ems+gas)))
 	dataEM=get_traindata(ista,aefapath)

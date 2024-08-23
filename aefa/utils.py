@@ -26,7 +26,7 @@ def asciiread(fname):
 	din:   a list of lines
 	withnewline: if with the newline symbol '\n': True: with; False: without
 	
-	Example:
+	EXAMPLE
 	
 	from aefa import asciiread
 	import os
@@ -46,7 +46,7 @@ def asciiwrite(fname,din,withnewline=False):
 	din:   a list of lines
 	withnewline: if with the newline symbol '\n': True: with; False: without
 	
-	Example:
+	EXAMPLE
 	
 	from aefa import asciiwrite
 	import os
@@ -69,7 +69,7 @@ def get_traindata(station='EM_101',aefapath='./'):
 	'''
 	get_traindata: get station-wise training data (for 203 weeks, no first week)
 	
-	Example:
+	EXAMPLE
 	from aefa import get_traindata
 	import os
 	data=get_traindata('EM_101',os.getenv('HOME')+"/DATALIB/AEFA.h5")
@@ -154,7 +154,7 @@ def get_label(aefapath='./'):
 	'''
 	get_label: get earthquake occurence label of AEFA
 	
-	Example:
+	EXAMPLE
 	from aefa import get_label
 	import os
 	label=get_label(os.getenv('HOME')+"/DATALIB/AEFA.h5")
@@ -300,3 +300,112 @@ def get_time():
 	times=[UTCDateTime(ii) for ii in timestamps]
 	
 	return times
+	
+	
+def get_testdata(week=1,station='EM_101',aefapath='./'):
+	'''
+	get_testdata: get station-wise training data (for 203 weeks, no first week)
+	
+	EXAMPLE:
+	
+	exe1
+	from aefa import get_testdata
+	import os
+	data=get_testdata(1,'EM_101',os.getenv('HOME')+"/DATALIB/AEFA.h5")
+
+	exe2
+	from aefa import get_testdata
+	import os
+	data=get_testdata(1,'GA_101',os.getenv('HOME')+"/DATALIB/AEFA.h5")
+	
+	'''
+	import h5py
+	f = h5py.File(aefapath, 'r')
+	idx="WK_%02d"%week
+	dataset = f.get(idx)
+	print('idx:',idx)
+	
+	keywords=list(f.get(idx).keys())
+
+	ems=[ii for ii in keywords if ii[0:2]=='EM']
+	gas=[ii for ii in keywords if ii[0:2]=='GA']
+	
+	ems=ems+gas
+
+	# wkno='WK_01'
+	allstas=[station]
+	for ista in range(len(allstas)):
+		print(idx,ista,len(allstas))
+	
+		emname=[ii for ii in ems if ii.split("_")[0]+'_'+ii.split("_")[-1]==allstas[ista] ]
+		
+		if len(emname) > 0:
+			print(idx,emname)
+			data_em=np.array(f.get(idx).get(emname[0])['data'])
+			data_em=np.nan_to_num(data_em, nan=0, posinf=33333333, neginf=33333333)
+			
+# 		ganame=[ii for ii in gas if ii.split("_")[-1]==allstas[ista] ]
+# 	
+# 		if len(ganame) > 0:
+# 			data_ga=np.array(f.get(idx).get(ganame[0])['data'])
+# 			print('Max/Min GA values: ',data_ga.max(),data_ga.min())
+			
+	return data_em
+
+
+def get_testlabel(aefapath='./',mode='occurence'):
+	'''
+	get_testlabel: get earthquake occurence label of AEFA for the testing data (30 weeks)
+	
+	
+	mode: occurence, magnitude, location
+	
+	EXAMPLE:
+	from aefa import get_testlabel
+	import os
+	label=get_testlabel(os.getenv('HOME')+"/DATALIB/AEFA.h5")
+	
+	'''
+	import os,h5py
+	
+	aefapath=os.getenv('HOME')+'/DATALIB/AEFA.h5'
+
+	f = h5py.File(aefapath, 'r')
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='WK']
+
+	
+	labclass=[]
+	mags=[]
+	lons=[]
+	lats=[]
+	for ii in range(len(keys)):
+		idx=keys[ii]
+		keywords=list(f.get(idx).keys())
+# 		print(keywords[-1])
+		yesno=f.get(idx).get('Label_EV').attrs['yesno']
+		
+		if yesno=='yes':
+			labclass.append(1)
+			mags.append(f.get(idx).get('Label_EV').attrs['ev_magnitude'])
+			lons.append(f.get(idx).get('Label_EV').attrs['ev_longitude'])
+			lats.append(f.get(idx).get('Label_EV').attrs['ev_latitude'])
+		else:
+			labclass.append(0)
+			mags.append(0)
+			lons.append(0)
+			lats.append(0)
+
+	
+	if mode=='occurence':
+		return labclass
+	elif mode=='magnitude':
+		return mags
+	elif mode=='location':
+		return [(lons[ii],lats[ii]) for ii in range(len(lons))]
+	else:
+		return labclass
+	
+	
+	
+	

@@ -39,10 +39,10 @@ for idx in keys:
 ##########################################################################################
 ## Training
 ##########################################################################################
+
 outall = []
 accall = []
 
-from pylib.io import asciiwrite
 if os.path.isdir('./firstmodels') == False:  
 	os.makedirs('./firstmodels',exist_ok=True)
 
@@ -50,61 +50,57 @@ keywords=list(f.keys())
 ems=[ii for ii in keywords if ii[0:2]=='EM']
 gas=[ii for ii in keywords if ii[0:2]=='GA']
 
-# ems=ems[0:2]
-# ems=['EM_193','EM_106']
-# # gas=gas[0:2]
-# # ems=[]
-# gas=['EM_88']
+from aefa import get_testdata,get_testlabel
+
 ic=0
-# ems=[]
+
+labclass=get_testlabel()
+print(labclass)
+# for ista in ems+gas:
+accall=[]
+outall=[]
 for ista in ems+gas:
-	ic=ic+1;
-	print('ista=%s, ic=%d/%d'%(ista,ic,len(ems+gas)))
-	dataEM=get_traindata(ista,aefapath)
-
-	ix = int(len(dataEM)*0.9)
-	labclass = np.array(labclass)  
-
-	if ista[0:2]=='EM':
-		data1 = np.reshape(dataEM,(203,1008,51))
-	else:
-		data1 = np.reshape(dataEM,(203,1008,44))
-# 	data2 = data1[1:,:,25:40]	#These two are different
-	data2 = data1[1:,:,:] 		#These two are different
-	data2 = np.reshape(data2,(data2.shape[0],data2.shape[1]*data2.shape[2]))
-	labclassx = labclass[1:]
-
-	data3=data2
-	labclass3=labclassx
-	regrEM = RandomForestClassifier(n_estimators=1000, ccp_alpha=0.001,oob_score=True,criterion='gini',random_state=123456)
-	ix = int(len(data2)*0.9)
-	regrEM.fit(data3[0:ix],labclass3[0:ix])  
-	filename='./firstmodels/RFmodel_%s.sav'%ista
-	joblib.dump(regrEM, filename)
-
-	# test
-	regrEM = joblib.load(filename)
-	outtestEM = regrEM.predict(data3[ix:])
-	dif = outtestEM - labclass3[ix:]
+	outtest=[]
+	filename='./firstmodels/RFmodel_PCA_%s.sav'%ista
+	for iweek in range(30):
+		
+		try:
+			data3=get_testdata(iweek+1,ista,os.getenv('HOME')+"/DATALIB/AEFA.h5")
+		except:
+			print('ista ',ista,' not available from testing data')
+			if ista[0:2]=='EM':
+				data3=np.ones([1008,51])
+			else:
+				data3=np.ones([1008,44])
+# 		data3 = np.reshape(data3,(1,data3.shape[0]*data3.shape[1]))
+		
+		if ista[0:2]=='EM':
+			pca = PCA(n_components=51)
+		else:
+			pca = PCA(n_components=44)
+		data2pca = []
+		pca.fit(np.transpose(data3[:,:]))
+	
+		data2pca.append(pca.singular_values_)
+		data22 = np.array(data2pca)
+		data3 = np.concatenate([data22[0,:]], axis=-1)
+		data3=np.transpose(np.expand_dims(data3,1))
+		print('data3.shape',data3.shape)
+		# test
+		regrEM = joblib.load(filename)
+		outtestEM = regrEM.predict(data3)
+		outtest.append(outtestEM)
+	print(outtest)
+		
+	dif = np.array(outtest).flatten() - np.array(labclass).flatten()
 	acc = len(np.where(dif==0)[0])/len(dif)
 	print('ista=%s,acc=%g'%(ista,acc))
-	accall.append(acc)		 #accuracy
-	outall.append(outtestEM) #prediction results
+
+	accall.append(acc)
+	outall.append(outtest)
+asciiwrite('accall_pca.txt',accall)
+asciiwrite('outall_pca.txt',outall)
+
+
+
 	
-
-asciiwrite('accall.txt',accall)
-asciiwrite('outall.txt',outall)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
