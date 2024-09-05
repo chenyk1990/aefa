@@ -150,7 +150,7 @@ def get_traindata(station='EM_101',aefapath='./'):
 	
 	return data19
 	
-def get_label(aefapath='./'):
+def get_label(aefapath='./',ifmag=False):
 	'''
 	get_label: get earthquake occurence label of AEFA
 	
@@ -158,6 +158,12 @@ def get_label(aefapath='./'):
 	from aefa import get_label
 	import os
 	label=get_label(os.getenv('HOME')+"/DATALIB/AEFA.h5")
+
+	EXAMPLE
+	from aefa import get_label
+	import os
+	aefapath=os.getenv('HOME')+"/DATALIB/AEFA.h5"
+	labelmag=get_label(aefapath,ifmag=True)
 	
 	'''
 	from obspy.core.utcdatetime import UTCDateTime
@@ -263,7 +269,12 @@ def get_label(aefapath='./'):
 		cc = cc+1
 	labclass = np.array(labclass)	
 
-	return labclass
+	
+	if ifmag == True:
+		magvalue = np.array([np.round(np.array(ii).max()) for ii in magweek1])
+		return magvalue[1:]
+	else:
+		return labclass
 	
 	
 def get_time():

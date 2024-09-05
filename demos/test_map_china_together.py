@@ -1,18 +1,20 @@
 import os
+import matplotlib.pyplot as plt
+
 if os.path.isdir('./Fig') == False:  
-	os.makedirs('./Fig',exist_ok=True)
-	
-def plotmap(stas,events,lat1, lat2, lon0, lon1,lon2,lat0,dlat=10.,dlon=20., reso='c', plot=False, plot_filename=None, title=None, ifsta=True):
+    os.makedirs('./Fig',exist_ok=True)
+    
+def plotmap(stas,events,lat1, lat2, lon0, lon1,lon2,lat0,dlat=10.,dlon=20., reso='c', plot=False, plot_filename=None, title=None, ifsta=True,ifcolor=True,iflegend=True):
     '''
-	INPUT
-	stas: station list
-	events: event list
-	others are intuitive
+    INPUT
+    stas: station list
+    events: event list
+    others are intuitive
 
     '''
     
     import numpy as np
-    import matplotlib.pyplot as plt
+
     from mpl_toolkits.basemap import Basemap
 
     from obspy.imaging.beachball import beach
@@ -22,7 +24,6 @@ def plotmap(stas,events,lat1, lat2, lon0, lon1,lon2,lat0,dlat=10.,dlon=20., reso
     minlon=lon1
     maxlon=lon2
 
-    fig = plt.figure(figsize=(8, 6))
     m = Basemap(
     projection='cyl', resolution='l',
     llcrnrlon=lon1,llcrnrlat=lat1,urcrnrlon=lon2,urcrnrlat=lat2,lat_1=lat1, lat_2=lat2, lat_0=lat0, lon_1=lon1,lon_2=lon2,lon_0=lon0)
@@ -35,20 +36,34 @@ def plotmap(stas,events,lat1, lat2, lon0, lon1,lon2,lat0,dlat=10.,dlon=20., reso
     x, y = m(*np.meshgrid(lons, lats)) #strange here (1081,540)->meshgrid-> [540,1081)
     cs = m.contourf(x,y,etopo,30,cmap=plt.cm.jet)
 
-    m.colorbar(location='bottom',pad='10%',label='Elevation (m)')
+    if ifcolor==True:
+        m.colorbar(location='bottom',pad='10%',label='Elevation (m)')
+        
     # add a title.
 #     plt.title('AEFA station and event distribution')
 
+    if ifsta: #just for legend
+        x_s,y_s=m(stas[0][0],stas[0][1])
+        plt.plot(x_s,y_s,'v',color='b',markersize=5)
+        x_s,y_s=m(events[0][0],events[0][1])
+        plt.plot(x_s,y_s,'*',color='m',markersize=5)
+        
     for istation in stas:
         x_s,y_s=m(istation[0],istation[1])
         if ifsta:
-        	plt.plot(x_s,y_s,'v',color='b',markersize=5)
+            plt.plot(x_s,y_s,'v',color='b',markersize=5)#,label='Stations')
         
     for ievent in events:
-        
         x_s,y_s=m(ievent[0],ievent[1])
-        plt.plot(x_s,y_s,'*',color='m',markersize=5)
+        plt.plot(x_s,y_s,'*',color='m',markersize=5)#,label='Events')
         
+    if iflegend==True:
+        if ifsta:
+            plt.legend(['Stations', 'Events'], loc='upper left')
+        else:
+            plt.legend(['Events'], loc='upper left')
+        
+#         plt.legend(loc='upper left')
     m.drawcoastlines()
     m.drawcountries()
 #     m.fillcontinents()
@@ -63,14 +78,15 @@ def plotmap(stas,events,lat1, lat2, lon0, lon1,lon2,lat0,dlat=10.,dlon=20., reso
     if title is not None:
         plt.rcParams['axes.titley'] = 1.04 
         plt.gca().set_title(title)
-	
+    
     if plot:
         if plot_filename is not None:
             plt.savefig(plot_filename,format='png',dpi=1000)
-        plt.show()
+#         plt.show()
     else: 
         if plot_filename is None:
-            plt.show()
+#             plt.show()
+            pass
         else:
             plt.savefig(plot_filename,format='pdf',dpi=1000)
             
@@ -101,8 +117,11 @@ stations=[[f.get(ii).attrs['sta_longitude'],f.get(ii).attrs['sta_latitude']] for
 
 
 
+fig = plt.figure(figsize=(8, 12))
+ax=plt.subplot(2,1,1)
+plt.gca().text(-0.15,1,'(a)',transform=plt.gca().transAxes,size=20,weight='normal')
 
-plotmap(stations,events,lat1=15.,lat2=55.,dlat=10.,lon1=70.,lon2=140.,dlon=10.,lon0=105., lat0=35, reso='c',plot=True,title='Training data',plot_filename="./Fig/china_regional.png")
+plotmap(stations,events,lat1=15.,lat2=55.,dlat=10.,lon1=70.,lon2=140.,dlon=10.,lon0=105., lat0=35, reso='c',plot=True,title='Training data',plot_filename="./Fig/china_regional.png",ifcolor=False,iflegend=True)
 
 
 f = h5py.File(aefapath, 'r')
@@ -115,30 +134,32 @@ lons=[]
 lats=[]
 weeks=[]
 for ii in range(len(keys)):
-	idx=keys[ii]
-	keywords=list(f.get(idx).keys())
-	print(keywords[-1])
-	yesno=f.get(idx).get('Label_EV').attrs['yesno']
-	if yesno=='yes':
-		print('Week with EQs:',idx)
-		Neqs=len(f.get(idx).get('Label_EV').keys())
-		keys2=list(f.get(idx).get('Label_EV').keys())
+    idx=keys[ii]
+    keywords=list(f.get(idx).keys())
+    print(keywords[-1])
+    yesno=f.get(idx).get('Label_EV').attrs['yesno']
+    if yesno=='yes':
+        print('Week with EQs:',idx)
+        Neqs=len(f.get(idx).get('Label_EV').keys())
+        keys2=list(f.get(idx).get('Label_EV').keys())
 
-		if Neqs==0:
-				mags.append(f.get(idx).get('Label_EV').attrs['ev_magnitude'])
-				lons.append(f.get(idx).get('Label_EV').attrs['ev_longitude'])
-				lats.append(f.get(idx).get('Label_EV').attrs['ev_latitude'])
-				weeks.append(f.get(idx).get('Label_EV').attrs['ev_week'])
-		else:
-			for jj in range(Neqs):
-				mags.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_magnitude'])
-				lons.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_longitude'])
-				lats.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_latitude'])
-				weeks.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_week'])
+        if Neqs==0:
+                mags.append(f.get(idx).get('Label_EV').attrs['ev_magnitude'])
+                lons.append(f.get(idx).get('Label_EV').attrs['ev_longitude'])
+                lats.append(f.get(idx).get('Label_EV').attrs['ev_latitude'])
+                weeks.append(f.get(idx).get('Label_EV').attrs['ev_week'])
+        else:
+            for jj in range(Neqs):
+                mags.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_magnitude'])
+                lons.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_longitude'])
+                lats.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_latitude'])
+                weeks.append(f.get(idx).get('Label_EV').get(keys2[jj]).attrs['ev_week'])
 
 events2=[[lons[ii],lats[ii]] for ii in range(len(lons))]
 
-plotmap(stations,events2,lat1=15.,lat2=55.,dlat=10.,lon1=70.,lon2=140.,dlon=10.,lon0=105., lat0=35, reso='c',plot=True,title='Testing data',ifsta=False,plot_filename="./Fig/china_regional_testing.png")
+ax=plt.subplot(2,1,2)
+plt.gca().text(-0.15,1,'(b)',transform=plt.gca().transAxes,size=20,weight='normal')
+plotmap(stations,events2,lat1=15.,lat2=55.,dlat=10.,lon1=70.,lon2=140.,dlon=10.,lon0=105., lat0=35, reso='c',plot=True,title='Testing data',ifsta=False,plot_filename="./Fig/china_regional_testing.png",ifcolor=True,iflegend=True)
 
 
 
