@@ -214,7 +214,8 @@ Plot all events onto the above figures.
 	import h5py
 	from obspy.core.utcdatetime import UTCDateTime
 	import matplotlib.pyplot as plt
- 
+	import numpy as np
+ 	
 	f = h5py.File("AEFA.h5", 'r')
 	t0=UTCDateTime(2017, 1, 1, 0, 0, 0)
 	keys=list(f.keys())
