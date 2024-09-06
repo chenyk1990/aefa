@@ -222,6 +222,8 @@ Plot all events onto the above figures.
 	keys=[ii for ii in keys if ii[0:2]=='EV']
 	#extract all event samples
 	samples=[int((float(UTCDateTime(f.get(ii).attrs['ev_time']))-float(t0))/60/10) for ii in keys]
+	mags=[float(UTCDateTime(f.get(ii).attrs['ev_magnitude'])) for ii in keys]
+
 	#extract EM features
 	keys=list(f.keys())
 	keys=[ii for ii in keys if ii[0:2]=='EM']
@@ -236,17 +238,17 @@ Plot all events onto the above figures.
 	plt.ylabel('Variation', fontsize=12) 
 	plt.title('Station: '+idx, fontsize=12) 
 	plt.setp(ax1.get_xticklabels(), visible=False)
-	plt.plot(samples,50*np.ones(len(samples)),'r*')
+	plt.plot(samples,50*(np.ones(len(samples))+mags-np.ones(len(samples))*5),'r*')
 
 	ax1 = fig.add_subplot(312)
 	plt.plot(data[:,2], 'k',label='Z')
 	plt.ylabel('Skewness', fontsize=12) 
 	plt.setp(ax1.get_xticklabels(), visible=False)
-	plt.plot(samples,1*np.ones(len(samples)),'r*')
+	plt.plot(samples,1*(np.ones(len(samples))+mags-np.ones(len(samples))*5),'r*')
  
 	ax1 = fig.add_subplot(313)
 	plt.plot(data[:,3], 'k',label='Z')
-	plt.plot(samples,50*np.ones(len(samples)),'r*')
+	plt.plot(samples,50*(np.ones(len(samples))+mags-np.ones(len(samples))*5),'r*')
 	plt.ylabel('Kurtosis', fontsize=12) 
 	plt.xlabel('Sample', fontsize=12) 
 	plt.show()
@@ -265,23 +267,23 @@ Plot all events onto the above figures.
 	plt.ylabel('Variation', fontsize=12) 
 	plt.title('Station: '+idx, fontsize=12) 
 	plt.setp(ax1.get_xticklabels(), visible=False)
-	plt.plot(samples,5*np.ones(len(samples)),'r*')
+	plt.plot(samples,5*(np.ones(len(samples))+mags-np.ones(len(samples))*5),'r*')
 
 	ax1 = fig.add_subplot(312)
 	plt.plot(data[:,2], 'k',label='Z')
 	plt.ylabel('Skewness', fontsize=12) 
 	plt.setp(ax1.get_xticklabels(), visible=False)
-	plt.plot(samples,50*np.ones(len(samples)),'r*')
+	plt.plot(samples,50*(np.ones(len(samples))+mags-np.ones(len(samples))*5),'r*')
  
 	ax1 = fig.add_subplot(313)
 	plt.plot(data[:,3], 'k',label='Z')
-	plt.plot(samples,10000*np.ones(len(samples)),'r*')
+	plt.plot(samples,10000*(np.ones(len(samples))+mags-np.ones(len(samples))*5),'r*')
 	plt.ylabel('Kurtosis', fontsize=12) 
 	plt.xlabel('Sample', fontsize=12) 
 	plt.show()
 
-<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/em101ev.png' alt='Slicing' width=960/>
-<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/ga101ev.png' alt='Slicing' width=960/>
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/em101evnew.png' alt='Slicing' width=960/>
+<img src='https://github.com/chenyk1990/gallery/blob/main/aefa/ga101evnew.png' alt='Slicing' width=960/>
 
 Extracting the local time in UTC format following an abnormal pattern in the feature plots
 
