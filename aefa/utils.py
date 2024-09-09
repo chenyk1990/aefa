@@ -65,6 +65,46 @@ def asciiwrite(fname,din,withnewline=False):
 		for ii in range(len(din)):
 			f.write(str(din[ii])+"\n")
 
+def get_week(station='EM_101',aefapath='./'):
+	'''
+	get_week: get week interval
+	
+	three columns in each list entry are weekNO,starting time (local),ending time (local)
+	
+	EXAMPLE
+	from aefa import get_week
+	import os
+	weeks=get_week()
+	
+	'''
+	from obspy.core.utcdatetime import UTCDateTime
+	import h5py
+	import numpy as np
+
+	##########################################################################################
+	contime= 8 * 60 *60
+	t0 = UTCDateTime(1483200000+contime) 	#begin time: 2017-01-01T00:00:00.000000Z
+	tend = UTCDateTime(1606751400+contime) 	#end time: 2020-11-30T23:50:00.000000Z
+	t0, tend
+
+	v = int(tend-t0)/(10*60)
+	t10min=[]
+	c=0
+	for cv in range(0,int(v)):
+		c =t0 + (cv*10*60)
+		t10min.append(c)
+	
+	v = int(tend-t0)/(7*24*60*60)
+	tweek=[]
+	c=0
+	for cv in range(0,int(v)):
+		c =t0 + (cv*7*24*60*60)
+		tweek.append(c)
+	tweek.append(c+7*24*60*60) #making it 205 weeks (actually there are only 204 complete weeks)
+
+	weeks=[str(ii+1)+" "+str(tweek[ii])+" "+str(tweek[ii+1]) for ii in range(len(tweek)-1)]
+	return weeks
+
 def get_traindata(station='EM_101',aefapath='./'):
 	'''
 	get_traindata: get station-wise training data (for 203 weeks, no first week)
@@ -98,7 +138,7 @@ def get_traindata(station='EM_101',aefapath='./'):
 	for cv in range(0,int(v)):
 		c =t0 + (cv*7*24*60*60)
 		tweek.append(c)
-	
+	tweek.append(c+7*24*60*60) #making it 205 weeks (actually there are only 204 complete weeks)
 	f = h5py.File(aefapath, 'r')
 
 # 	keys=list(f.keys())
@@ -133,7 +173,7 @@ def get_traindata(station='EM_101',aefapath='./'):
 	dataset = f.get('%s'%station)
 	data=np.array(dataset['data'])
 	data19=[]
-	for i in range(1,204):
+	for i in range(1,205):
 
 		a = int(tweek[i-1]-t0)/(10*60)
 		b = int(tweek[i]-t0)/(10*60)
@@ -150,21 +190,26 @@ def get_traindata(station='EM_101',aefapath='./'):
 	
 	return data19
 	
-def get_label(aefapath='./',ifmag=False):
+def get_label(aefapath='./',mode='occurence'):
 	'''
 	get_label: get earthquake occurence label of AEFA
 	
-	EXAMPLE
+	EXAMPLE 1
 	from aefa import get_label
 	import os
 	label=get_label(os.getenv('HOME')+"/DATALIB/AEFA.h5")
 
-	EXAMPLE
+	EXAMPLE 2
 	from aefa import get_label
 	import os
 	aefapath=os.getenv('HOME')+"/DATALIB/AEFA.h5"
-	labelmag=get_label(aefapath,ifmag=True)
-	
+	labelmag=get_label(aefapath,mode='magnitude')
+
+	EXAMPLE 3
+	from aefa import get_label
+	import os
+	aefapath=os.getenv('HOME')+"/DATALIB/AEFA.h5"
+	labelloc=get_label(aefapath,mode='location')
 	'''
 	from obspy.core.utcdatetime import UTCDateTime
 	
@@ -219,7 +264,7 @@ def get_label(aefapath='./',ifmag=False):
 			d = UTCDateTime(q)-UTCDateTime(dataset.attrs['ev_time'])
 			if d>=0:
 				ind=b-1
-				tweek_lab[ind]=tweek_lab[ind]+1
+				tweek_lab[ind]=tweek_lab[ind]+1 #This is the actual EQ week (one week after the label week)
 				mag.append(dataset.attrs['ev_magnitude'])
 				Lat.append(dataset.attrs['ev_latitude'])
 				Long.append(dataset.attrs['ev_longitude'])
@@ -231,7 +276,7 @@ def get_label(aefapath='./',ifmag=False):
 	
 		magweek = np.zeros_like(tweek_lab)
 		latweek = np.zeros_like(tweek_lab)
-		longweek = np.zeros_like(tweek_lab)
+		lonweek = np.zeros_like(tweek_lab)
 
 	v = 0
 	c = 0
@@ -239,26 +284,25 @@ def get_label(aefapath='./',ifmag=False):
 		if i>0:
 			magweek[v] = magall[c:c+i]
 			latweek[v] = Latall[c:c+i]
-			longweek[v] = Longall[c:c+i]
+			lonweek[v] = Longall[c:c+i]
 			c = c +i
 		else:
 			magweek[v]=0
-			latweek[v]=0
-			longweek[v]=0
+			latweek[v]=[[0]]
+			lonweek[v]=[[0]]
 		v = v+1
 	
-	magweek1 = magweek[1:]
+# 	magweek1 = magweek[1:]
+	magweek1 = magweek
 	# np.save('magweekLab.npy',magweek1)
 
-	latweek1 = latweek[1:]
+	latweek1 = latweek
 	# np.save('latweekLab.npy',latweek1)
 
-	longweek1 = longweek[1:]
-	# np.save('longweekLab.npy',longweek1)
+	lonweek1 = lonweek
+	# np.save('lonweekLab.npy',lonweek1)
 	
 	len(tweek_lab), int(tweek[2]-t0)/(10*60), int(tweek[3]-t0)/(10*60)
-
-	tweek_lab1 = tweek_lab[1:]
 
 	lab=tweek_lab
 	labclass = np.zeros((len(lab)))
@@ -269,14 +313,21 @@ def get_label(aefapath='./',ifmag=False):
 		cc = cc+1
 	labclass = np.array(labclass)	
 
-	
-	if ifmag == True:
-		magvalue = np.array([np.round(np.array(ii).max()) for ii in magweek1])
-		return magvalue[1:]
+	if mode=='occurence':
+		return labclass
+	elif mode=='magnitude':
+		mags = np.array([np.round(np.array(ii).max()) for ii in magweek1])
+		return mags
+	elif mode=='location':
+		inds=np.array([np.array(ii).argmax() for ii in magweek1],dtype='int')
+		lons=np.array([lonweek1[ii][inds[ii]] for ii in range(len(lonweek1))]).flatten()
+		lats=np.array([latweek1[ii][inds[ii]] for ii in range(len(latweek1))]).flatten()
+		return [(lons[ii],lats[ii]) for ii in range(len(inds))]
 	else:
 		return labclass
-	
-	
+		
+		
+		
 def get_time():
 	'''
 	get_time: get the time axis for AEFA
