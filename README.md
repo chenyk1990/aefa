@@ -72,12 +72,13 @@ Print all event attributes in AEFA
 	dataset = f.get(idx)
 	print('AEFA event attributes are:',dataset.attrs.keys())
 	
-Print event (idth) information in AEFA
+Print event (idth) information in AEFA. In this case, the first earthquake in the 204 weeks occurred on 2017-01-15T18:05:35.000000Z, week=3 (actual week). In forecasting, the occurrence label for week=2 should be set to 1 (ML label is always one week before the actual occurrence). It is a bit confusing, but please pay attention.
+
 
 	import h5py
 	f = h5py.File("AEFA.h5", 'r')
 	keys=list(f.keys())
-	id=2 #event NO
+	id=1 #event NO
 	keys=[ii for ii in keys if ii=='EV_%d'%id]
 	idx=keys[0]
 	dataset = f.get(idx)
