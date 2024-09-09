@@ -101,11 +101,13 @@ Check the 204 week intervals in AEFA training data
 
 	from aefa import get_week
 	weeks=get_week()
+	print(weeks)
 
 Check the 30 week intervals in AEFA testing data
 
 	from aefa import get_week_test
 	weeks=get_week_test()
+	print(weeks)
  
 Plot Events (quickly) of AEFA
 
