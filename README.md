@@ -95,6 +95,12 @@ Print feature names in AEFA
 	dataset = f.get('FeatureGA')
 	features=np.array(dataset['features'],dtype='str')
 	print('There are %d GA features'%len(features),' they are:',list(features))
+
+Check the 204 week intervals in AEFA
+
+	from aefa import get_week
+	import os
+	weeks=get_week()
  
 Plot Events (quickly) of AEFA
 
