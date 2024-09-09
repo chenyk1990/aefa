@@ -65,7 +65,7 @@ def asciiwrite(fname,din,withnewline=False):
 		for ii in range(len(din)):
 			f.write(str(din[ii])+"\n")
 
-def get_week(station='EM_101',aefapath='./'):
+def get_week():
 	'''
 	get_week: get week interval
 	
@@ -85,16 +85,9 @@ def get_week(station='EM_101',aefapath='./'):
 	contime= 8 * 60 *60
 	t0 = UTCDateTime(1483200000+contime) 	#begin time: 2017-01-01T00:00:00.000000Z
 	tend = UTCDateTime(1606751400+contime) 	#end time: 2020-11-30T23:50:00.000000Z
-	t0, tend
-
-	v = int(tend-t0)/(10*60)
-	t10min=[]
-	c=0
-	for cv in range(0,int(v)):
-		c =t0 + (cv*10*60)
-		t10min.append(c)
+	print('Starting and Ending time of testing data are', t0, tend)
 	
-	v = int(tend-t0)/(7*24*60*60)
+	v = int(tend-t0)/(7*24*60*60) #number of weeks
 	tweek=[]
 	c=0
 	for cv in range(0,int(v)):
@@ -105,6 +98,38 @@ def get_week(station='EM_101',aefapath='./'):
 	weeks=[str(ii+1)+" "+str(tweek[ii])+" "+str(tweek[ii+1]) for ii in range(len(tweek)-1)]
 	return weeks
 
+def get_week_test():
+	'''
+	get_week_test: get week interval in the testing data
+	
+	three columns in each list entry are weekNO,starting time (local),ending time (local)
+	
+	EXAMPLE
+	from aefa import get_week_test
+	import os
+	weeks=get_week_test()
+	
+	'''
+	from obspy.core.utcdatetime import UTCDateTime
+	import h5py
+	import numpy as np
+
+	##########################################################################################
+	t0 = UTCDateTime(2021,3,28) 	#begin time: 2021-03-28T00:00:00.000000Z
+	tend = UTCDateTime(2021,10,24) 	#end time: 2021-10-23T23:50:00.000000Z
+	print('Starting and Ending time of testing data are', t0, tend)
+	
+	v = int(tend-t0)/(7*24*60*60) #number of weeks
+	tweek=[]
+	c=0
+	for cv in range(0,int(v)):
+		c =t0 + (cv*7*24*60*60)
+		tweek.append(c)
+	tweek.append(c+7*24*60*60) #making it 205 weeks (actually there are only 204 complete weeks)
+
+	weeks=[str(ii+1)+" "+str(tweek[ii])+" "+str(tweek[ii+1]) for ii in range(len(tweek)-1)]
+	return weeks
+	
 def get_traindata(station='EM_101',aefapath='./'):
 	'''
 	get_traindata: get station-wise training data (for 203 weeks, no first week)
@@ -190,9 +215,19 @@ def get_traindata(station='EM_101',aefapath='./'):
 	
 	return data19
 	
-def get_label(aefapath='./',mode='occurence'):
+def get_label(aefapath='./',mode='occurence',ifmag='True'):
 	'''
 	get_label: get earthquake occurence label of AEFA
+	
+	NOTE: 
+	Actual EQ label week is one week after the ML label in a forecasting-classification problem
+	
+	For instance
+	If the data from Week2-203 is selected for training
+	Correspondingly, the label for EQ occurence is Week3-204 
+	
+	The first EQ earthquake in the 204-week training data occurred in the third week
+	but for forecasting it, the label in the second week should be set as 1 (one week before)
 	
 	EXAMPLE 1
 	from aefa import get_label
@@ -211,6 +246,10 @@ def get_label(aefapath='./',mode='occurence'):
 	aefapath=os.getenv('HOME')+"/DATALIB/AEFA.h5"
 	labelloc=get_label(aefapath,mode='location')
 	'''
+	
+	if ifmag==True:
+		mode='magnitude' #for compatible with old version
+	
 	from obspy.core.utcdatetime import UTCDateTime
 	
 	##########################################################################################
@@ -292,16 +331,6 @@ def get_label(aefapath='./',mode='occurence'):
 			lonweek[v]=[[0]]
 		v = v+1
 	
-# 	magweek1 = magweek[1:]
-	magweek1 = magweek
-	# np.save('magweekLab.npy',magweek1)
-
-	latweek1 = latweek
-	# np.save('latweekLab.npy',latweek1)
-
-	lonweek1 = lonweek
-	# np.save('lonweekLab.npy',lonweek1)
-	
 	len(tweek_lab), int(tweek[2]-t0)/(10*60), int(tweek[3]-t0)/(10*60)
 
 	lab=tweek_lab
@@ -316,12 +345,12 @@ def get_label(aefapath='./',mode='occurence'):
 	if mode=='occurence':
 		return labclass
 	elif mode=='magnitude':
-		mags = np.array([np.round(np.array(ii).max()) for ii in magweek1])
+		mags = np.array([np.round(np.array(ii).max()) for ii in magweek])
 		return mags
 	elif mode=='location':
-		inds=np.array([np.array(ii).argmax() for ii in magweek1],dtype='int')
-		lons=np.array([lonweek1[ii][inds[ii]] for ii in range(len(lonweek1))]).flatten()
-		lats=np.array([latweek1[ii][inds[ii]] for ii in range(len(latweek1))]).flatten()
+		inds=np.array([np.array(ii).argmax() for ii in magweek],dtype='int')
+		lons=np.array([lonweek[ii][inds[ii]] for ii in range(len(lonweek))]).flatten()
+		lats=np.array([latweek[ii][inds[ii]] for ii in range(len(latweek))]).flatten()
 		return [(lons[ii],lats[ii]) for ii in range(len(inds))]
 	else:
 		return labclass

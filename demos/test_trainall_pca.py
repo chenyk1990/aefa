@@ -17,7 +17,7 @@ aefapath=os.getenv('HOME')+'/DATALIB/AEFA.h5'
 #### Get training labels (earthquake occurence)
 ##########################################################################################
 
-labclass=get_label(aefapath)[1:]
+labclass=get_label(aefapath)
 
 f = h5py.File(aefapath, 'r')
 keys=list(f.keys())
@@ -63,10 +63,15 @@ for ista in ems+gas:
 		data1 = np.reshape(dataEM,(203,1008,51))
 	else:
 		data1 = np.reshape(dataEM,(203,1008,44))
-# 	data2 = data1[1:,:,25:40]	#These two are different
-	data2 = data1[1:,:,:] 		#These two are different #202 weeks' sample	
+		
+	#The following is to select the Week2-203 for training
+	#Correspondingly, the label for EQ occurence is Week3-204 
+	#NOTE: Actual EQ label week is one week after the ML label in a forecasting-classification problem
+
+# 	data2 = data1[1:-1,:,25:40]		#These two are different
+	data2 = data1[1:-1,:,:] 		#These two are different
 	
-	data3=[]
+	inputdata=[]
 	for ii in range(data2.shape[0]):
 		
 		if ista[0:2]=='EM':
@@ -79,21 +84,20 @@ for ista in ems+gas:
 		data2pca.append(pca.singular_values_)
 		data22 = np.array(data2pca)
 		data22 = np.concatenate([data22[0,:]], axis=-1)
-		data3.append(data22)
-	data3=np.array(data3)
-	labclassx = labclass[1:] 	#202 weeks' sample
+		inputdata.append(data22)
+	inputdata=np.array(inputdata)
 
-	labclass3=labclassx
+	inputlabel=labclass[2:]
 	regrEM = RandomForestClassifier(n_estimators=1000, ccp_alpha=0.001,oob_score=True,criterion='gini',random_state=123456)
 	ix = int(len(data2)*0.9)
-	regrEM.fit(data3[0:ix],labclass3[0:ix])  
+	regrEM.fit(inputdata[0:ix],inputlabel[0:ix])  
 	filename='./firstmodels/RFmodel_PCA_%s.sav'%ista
 	joblib.dump(regrEM, filename)
 
 	# test
 	regrEM = joblib.load(filename)
-	outtestEM = regrEM.predict(data3[ix:])
-	dif = outtestEM - labclass3[ix:]
+	outtestEM = regrEM.predict(inputdata[ix:])
+	dif = outtestEM - inputlabel[ix:]
 	acc = len(np.where(dif==0)[0])/len(dif)
 	print('ista=%s,acc=%g'%(ista,acc))
 	accall.append(acc)		 #accuracy

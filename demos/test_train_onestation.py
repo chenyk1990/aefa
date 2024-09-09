@@ -17,7 +17,7 @@ aefapath=os.getenv('HOME')+'/DATALIB/AEFA.h5'
 #### Get training labels (earthquake occurence)
 ##########################################################################################
 
-labclass=get_label(aefapath)[1:]
+labclass=get_label(aefapath)
 
 f = h5py.File(aefapath, 'r')
 keys=list(f.keys())
@@ -27,14 +27,10 @@ idx=keys[0]
 keys=keys[1:]
 for idx in keys:
 	dataset = f.get(idx)
-# print('AEFA event attributes are:',dataset.keys())
 
 	keywords=list(f.get(idx).keys())
 
 	ems=[ii for ii in keywords if ii[0:2]=='EM']
-	
-# ista=106 #ACC:0.5714285714285714
-# ista=193 #ACC:0.7619047619047619
 
 ##########################################################################################
 ## Training
@@ -57,6 +53,7 @@ gas=[ii for ii in keywords if ii[0:2]=='GA']
 # gas=['GA_101']
 
 gas=['GA_101']
+gas=['EM_193']
 ic=0
 for ista in gas:
 	ic=ic+1;
@@ -67,32 +64,35 @@ for ista in gas:
 	labclass = np.array(labclass)  
 
 	if ista[0:2]=='EM':
-		data1 = np.reshape(dataEM,(203,1008,51))
+		data1 = np.reshape(dataEM,(204,1008,51))
 	else:
-		data1 = np.reshape(dataEM,(203,1008,44))
-# 	data2 = data1[1:,:,25:40]	#These two are different
-	data2 = data1[1:,:,:] 		#These two are different
-	data2 = np.reshape(data2,(data2.shape[0],data2.shape[1]*data2.shape[2]))
-	labclassx = labclass[1:]
+		data1 = np.reshape(dataEM,(204,1008,44))
+		
+	#The following is to select the Week2-203 for training
+	#Correspondingly, the label for EQ occurence is Week3-204 
+	#NOTE: Actual EQ label week is one week after the ML label in a forecasting-classification problem
 
-	data3=data2
-	labclass3=labclassx
+# 	data2 = data1[1:-1,:,25:40]		#These two are different
+	data2 = data1[1:-1,:,:] 		#These two are different
+	data2 = np.reshape(data2,(data2.shape[0],data2.shape[1]*data2.shape[2]))
+	inputlabel = labclass[2:]
+	inputdata=data2
+	
 	regrEM = RandomForestClassifier(n_estimators=1000, ccp_alpha=0.001,oob_score=True,criterion='gini',random_state=123456)
 	ix = int(len(data2)*0.9)
-	regrEM.fit(data3[0:ix],labclass3[0:ix])  
+	regrEM.fit(inputdata[0:ix],inputlabel[0:ix])  
 	filename='./firstmodels/RFmodel_%s.sav'%ista
 	joblib.dump(regrEM, filename)
 
 	# test
 	regrEM = joblib.load(filename)
-	outtestEM = regrEM.predict(data3[ix:])
-	dif = outtestEM - labclass3[ix:]
+	outtestEM = regrEM.predict(inputdata[ix:])
+	dif = outtestEM - inputlabel[ix:]
 	acc = len(np.where(dif==0)[0])/len(dif)
 	print('ista=%s,acc=%g'%(ista,acc))
 	accall.append(acc)		 #accuracy
 	outall.append(outtestEM) #prediction results
 	
-
 asciiwrite('accall.txt',accall)
 asciiwrite('outall.txt',outall)
 

@@ -24,7 +24,6 @@ dataga=np.zeros([205920,len(keys1)])
 dataem=np.zeros([205920,len(keys2)])
 
 
-
 ic=-1;
 for ii in keys1:
 	print('ic=',ic)
@@ -50,7 +49,6 @@ for ii in keys2:
 	
 
 fig = plt.figure(figsize=(14, 8))
-
 plt.subplot(2,2,1)
 plt.imshow(dataem,cmap=plt.cm.jet,aspect='auto')
 plt.title('EM station completeness')

@@ -33,32 +33,30 @@ print(f"The time is {toc - tic:0.4f} seconds");
 ## Training
 ##########################################################################################
 ista='EM_101'
-labclass=get_label(aefapath)[1:]
+labclass=get_label(aefapath)
 dataEM=get_traindata(ista,aefapath)
-
 
 ## Prepare for RF
 ix = int(len(dataEM)*0.9)
 labclass = np.array(labclass)  
-data1 = np.reshape(dataEM,(203,1008,51))
-data2 = data1[1:,:,:] #These two are different
+data1 = np.reshape(dataEM,(204,1008,51))
+data2 = data1[1:-1,:,:] 
 data2 = np.reshape(data2,(data2.shape[0],data2.shape[1]*data2.shape[2]))
-labclassx = labclass[1:]
 
-data3=data2
-labclass3=labclassx
+inputdata=data2
+inputlabel=labclass[2:]
 regrEM = RandomForestClassifier(n_estimators=1000, ccp_alpha=0.001,oob_score=True,criterion='gini',random_state=123456)
 ix = int(len(data2)*0.9)
 
 ## count time
 tic = time.perf_counter()
-regrEM.fit(data3[0:ix],labclass3[0:ix])  
+regrEM.fit(inputdata[0:ix],inputlabel[0:ix])  
 toc = time.perf_counter()
 print(f"Raw data take {toc - tic:0.4f} seconds");
 
 ## PCA preparation
-data3=[]
-data2 = data1[1:,:,:] 		#These two are different #202 weeks' sample	
+inputdata=[]
+data2 = data1[1:-1,:,:] 
 for ii in range(data2.shape[0]):
 	pca = PCA(n_components=51)
 	data2pca = []
@@ -67,12 +65,12 @@ for ii in range(data2.shape[0]):
 	data2pca.append(pca.singular_values_)
 	data22 = np.array(data2pca)
 	data22 = np.concatenate([data22[0,:]], axis=-1)
-	data3.append(data22)
-data3=np.array(data3)
+	inputdata.append(data22)
+inputdata=np.array(inputdata)
 
 ## count time
 tic = time.perf_counter()
-regrEM.fit(data3[0:ix],labclass3[0:ix])  
+regrEM.fit(inputdata[0:ix],inputlabel[0:ix])  
 toc = time.perf_counter()
 print(f"PCA data take {toc - tic:0.4f} seconds");
 
