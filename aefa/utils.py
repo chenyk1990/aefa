@@ -375,6 +375,8 @@ def get_testlabel(aefapath='./',mode='occurence'):
 	from aefa import get_testlabel
 	import os
 	label=get_testlabel(os.getenv('HOME')+"/DATALIB/AEFA.h5")
+	labelmag=get_testlabel(os.getenv('HOME')+"/DATALIB/AEFA.h5",mode='magnitude')
+	labelloc=get_testlabel(os.getenv('HOME')+"/DATALIB/AEFA.h5",mode='location')
 	
 	'''
 	import os,h5py
@@ -418,5 +420,73 @@ def get_testlabel(aefapath='./',mode='occurence'):
 		return labclass
 	
 	
+def get_testlabelaeta(aefapath='./',mode='occurence'):
+	'''
+	get_testlabelaeta: get earthquake occurence label of AEFA for the testing data (30 weeks)
 	
+	NOTE: The difference between get_testlabel and get_testlabelaeta is that the latter
+	removes the events that are far away from AETA stations. The AETA competition is
+	based on the labels from the latter (get_testlabelaeta). 
+	
+	For keep a record of all event information, we preserve both label functions.
+	
+	mode: occurence, magnitude, location
+	
+	EXAMPLE:
+	from aefa import get_testlabelaeta
+	import os
+	label=get_testlabelaeta(os.getenv('HOME')+"/DATALIB/AEFA.h5")
+	labelmag=get_testlabelaeta(os.getenv('HOME')+"/DATALIB/AEFA.h5",mode='magnitude')
+	labelloc=get_testlabelaeta(os.getenv('HOME')+"/DATALIB/AEFA.h5",mode='location')
+	
+	'''
+	import os,h5py
+	
+	aefapath=os.getenv('HOME')+'/DATALIB/AEFA.h5'
+
+	f = h5py.File(aefapath, 'r')
+	keys=list(f.keys())
+	keys=[ii for ii in keys if ii[0:2]=='WK']
+
+	
+	labclass=[]
+	mags=[]
+	lons=[]
+	lats=[]
+	for ii in range(len(keys)):
+		idx=keys[ii]
+		keywords=list(f.get(idx).keys())
+# 		print(keywords[-1])
+		yesno=f.get(idx).get('Label_EV').attrs['yesno']
+		
+		if yesno=='yes':
+			labclass.append(1)
+			mags.append(f.get(idx).get('Label_EV').attrs['ev_magnitude'])
+			lons.append(f.get(idx).get('Label_EV').attrs['ev_longitude'])
+			lats.append(f.get(idx).get('Label_EV').attrs['ev_latitude'])
+		else:
+			labclass.append(0)
+			mags.append(0)
+			lons.append(0)
+			lats.append(0)
+
+	weeks=[17,18,20,23] 
+	#In these weeks, event from China's catalog is removed due to the remoteness from nearest AETA stations
+	for iweek in weeks:
+		labclass[iweek-1]=0
+		mags[iweek-1]=0
+		lons[iweek-1]=0
+		lats[iweek-1]=0
+	
+	if mode=='occurence':
+		return labclass
+	elif mode=='magnitude':
+		return mags
+	elif mode=='location':
+		return [(lons[ii],lats[ii]) for ii in range(len(lons))]
+	else:
+		return labclass
+		
+		
+
 	
