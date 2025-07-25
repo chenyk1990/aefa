@@ -5,21 +5,21 @@
 **AEFA** An Earthquake Forecasting Dataset for AI
 
 ## Reference
-	Chen, Y., et al., “AEFA: An Earthquake Forecasting Dataset for AI,” TBD.
+	Chen, Y., et al., 2025, “AEFA: An Earthquake Forecasting Dataset for AI,”, Geodata and AI, 3, 100022.
 
     
 BibTeX:
 
 	@Article{aefa,
-	  author={Yangkang Chen et al.},
+	  author={Yangkang Chen and Alexandros Savvaidis and Yunfeng Chen and Chao Li and Shanshan Yong and Xin'an Wang and Omar M. Saad},
 	  title = {{AEFA}: An Earthquake Forecasting Dataset for {AI}},
-	  journal={TBD},
-	  year=2024,
-	  volume=1,
+	  journal={Geodata and AI},
+	  year=2025,
+	  volume=3,
 	  issue=1,
 	  number=1,
-	  pages={},
-	  doi={},
+	  pages={100022},
+	  doi={10.1016/j.geoai.2025.100022},
 	}
 
 -----------
